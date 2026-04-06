@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opportunity Scan — Apr 05, 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --blue: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --green-bg: #1a3f1e;
+    --yellow-bg: #3d2e0d;
+    --red-bg: #3d1210;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .back { font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+  h1 { color: var(--blue); font-size: 1.6rem; margin-bottom: 0.3rem; }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2.section {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2rem 0 1rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--border);
+  }
+
+  .card.high { border-left-color: var(--green); }
+  .card.mid  { border-left-color: var(--yellow); }
+  .card.low  { border-left-color: var(--red); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-title { font-weight: 600; font-size: 1.05rem; color: #e6edf3; }
+  .card-company { color: var(--blue); }
+  .card-location { color: var(--muted); font-size: 0.88rem; }
+
+  .score-badge {
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+  .score-badge.high { background: var(--green-bg); color: var(--green); }
+  .score-badge.mid  { background: var(--yellow-bg); color: var(--yellow); }
+  .score-badge.low  { background: var(--red-bg); color: var(--red); }
+
+  .summary { margin: 0.5rem 0 0.75rem; }
+
+  ul.factors {
+    list-style: none;
+    margin: 0.3rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  ul.factors li { padding-left: 1.2em; position: relative; font-size: 0.9rem; }
+  ul.factors li::before { position: absolute; left: 0; }
+
+  ul.strengths li::before { content: "+"; color: var(--green); }
+  ul.concerns li::before  { content: "–"; color: var(--yellow); }
+  ul.disq li::before      { content: "⚠"; color: var(--red); font-size: 0.8em; }
+
+  .card-link { margin-top: 0.75rem; font-size: 0.9rem; }
+
+  .below-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .below-list {
+    list-style: none;
+    padding: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .below-list li { padding: 0.2rem 0; }
+  .below-list a { color: var(--muted); }
+  .below-list a:hover { color: var(--text); }
+  .below-score { font-size: 0.8rem; }
+
+  .empty { color: var(--muted); font-style: italic; margin: 1rem 0; }
+</style>
+</head>
+<body>
+
+<p class="back"><a href="../index.html">← All Reports</a></p>
+
+<h1>Opportunity Scan — Apr 05, 2026</h1>
+<p class="meta">
+  Run 2026-04-05 21:40 &middot;
+  65 URLs found &middot;
+  62 scored &middot;
+  3 surfaced (score &ge; 5)
+</p>
+
+
+
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Director, Organizational Development & Learning</div>
+      <div>
+        <span class="card-company">HighLevel</span>
+        
+        <span class="card-location"> &middot; Remote</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">6/10</span>
+  </div>
+
+  
+  <p class="summary">Strong structural alignment on role type (L&D leadership, OD, leadership development) and remote eligibility, with meaningful AI adoption angle that matches Scott's target reputation; however, HighLevel is a sales/marketing SaaS platform with no mission resonance, and the role leans heavily into LMS/LXP ownership, learning technology infrastructure, and async/digital learning delivery that sits in Scott's weak-fit modality zone.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Remote-first, US-based — fully geography eligible</li><li>Director-level L&D leadership role with OD scope — matches Scott's target seniority and role type</li><li>Explicit AI adoption and AI-enabled ways of working mandate — directly maps to Scott's core identity thread around responsible AI adoption</li><li>Leadership and capability development across levels including executive — aligns with Scott's strong-fit audience signals</li><li>Zero-to-one charter framing (define and own L&D vision, roadmap, governance) — matches Scott's launch/build reputation goal</li><li>Cohort-based and VILT modalities mentioned alongside digital — partial modality alignment</li><li>Change management and culture intervention scope — plays to Scott's systems and OD background</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>HighLevel is a white-label sales and marketing SaaS platform — no mission resonance, not on watchlist, no education/impact/wellness angle</li><li>Role explicitly owns LMS/LXP platforms, content systems, and learning analytics infrastructure — squarely in Scott's weak-fit modality zone</li><li>Heavy emphasis on blended/digital/async learning design as a core deliverable — not Scott's strongest positioning</li><li>Serves a 1,500-person internal workforce across 15+ countries — general enterprise L&D, not the senior leader or VP+ audience Scott targets</li><li>No indication of experiential or simulation-based learning as a priority modality</li><li>Company culture and product (agencies, lead generation, marketing automation) is unlikely to personally resonate with Scott's values profile</li><li>Compensation not listed — at Director level in SaaS this could be strong, but context is unclear</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://jobs.lever.co/gohighlevel/44b9158a-8eb2-471f-ba04-d85a86a35ef7" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Learning and Development Manager</div>
+      <div>
+        <span class="card-company">Peloton Interactive</span>
+        
+        <span class="card-location"> &middot; New York, NY</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">6/10</span>
+  </div>
+
+  
+  <p class="summary">Peloton is on the personal interest watchlist and the role has genuine L&D leadership and live facilitation elements that align with Scott's background, but the job skews toward corporate L&D operations, LMS/content tooling, and async/digital program delivery rather than the experiential, simulation-based, or senior executive development work Scott prioritizes. It's worth a look given the company, but the day-to-day scope is a moderate fit at best.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Peloton is explicitly on the personal interest watchlist (fitness/wellness), triggering automatic surfacing</li><li>Role includes live facilitation of leadership seminars and cohort-style programming — a direct capability match</li><li>New York City location is eligible geography and could support East Coast positioning goals</li><li>Leadership development focus (feedback, coaching, conflict resolution) aligns with Scott's coaching identity</li><li>Manager-level scope with cross-functional stakeholder influence suggests some autonomy and building, not just maintaining</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Heavy emphasis on LMS platforms, Articulate, and digital/async content development — flagged as weak-fit modality</li><li>Role appears to serve all employees and managers broadly, not VP+ or senior leader audience Scott prioritizes</li><li>Significant operational and administrative load (program logistics, comms, resource library audits) may feel confining</li><li>No signal of zero-to-one founding opportunity — this is a manager role inside an existing L&D function</li><li>No AI adoption or edtech mission signal; Peloton is a watchlist company for wellness interest, not mission resonance</li><li>184 applicants already filed — competitive pool for a mid-level role</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://www.linkedin.com/jobs/view/learning-and-development-manager-at-peloton-interactive-4396169038" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Director of AI Education & Learning Innovation</div>
+      <div>
+        <span class="card-company">Inside Higher Ed</span>
+        
+        <span class="card-location"> &middot; San Angelo, TX</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">5/10</span>
+  </div>
+
+  
+  <p class="summary">The role title and domain are a strong conceptual match for Scott's core identity thread around responsible AI adoption in education, and Inside Higher Ed is a credible higher-ed-adjacent platform. However, the San Angelo, TX location is a significant geographic mismatch with Scott's stated preferences, and limited posting detail makes it difficult to assess whether the day-to-day work skews toward content/publishing versus program leadership.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Role title directly maps to Scott's primary identity thread: trusted leader in AI adoption for education</li><li>Inside Higher Ed operates at the intersection of AI and higher education — high mission resonance</li><li>Director-level scope suggests leadership and potential zero-to-one program building</li><li>Higher education sector aligns with Scott's experience and target audience</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>San Angelo, TX is not on Scott's eligible geography list — not remote-confirmed, not Boston/NYC/DC/Colorado</li><li>Inside Higher Ed is primarily a media/news organization; role may skew toward content production or editorial programming rather than live facilitation, experiential learning, or internal program leadership</li><li>No compensation information visible to assess against Scott's floor or tradeoff logic</li><li>Limited posting detail makes it hard to confirm whether this is a building/founding role or a maintaining/publishing role</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://www.linkedin.com/jobs/view/director-of-ai-education-amp-learning-innovation-at-inside-higher-ed-4393916269" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="below-section">
+  <h2 class="section">Below threshold (score &lt; 5)</h2>
+  <ul class="below-list">
+    
+    <li>
+      <a href="https://aderant.wd5.myworkdayjobs.com/en-US/Aderant_External_Careers/job/Learning-and-Development-Partner_REQ_100000178" target="_blank" rel="noopener">
+        Learning and Development Partner &mdash; Aderant
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/anthropic/jobs/5134153008" target="_blank" rel="noopener">
+        AI Productivity Lead, Communications &mdash; Anthropic
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/director-of-learning-science-2-hour-learning-remote-%24400-000-year-usd-at-crossover-4379453291" target="_blank" rel="noopener">
+        Director of Learning Science, 2 Hour Learning (Remote) - $400,000/year USD &mdash; Crossover
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/remote-head-of-learning-and-development-at-capetalent-4388461687" target="_blank" rel="noopener">
+        REMOTE Head of Learning and Development &mdash; CapeTalent
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/director-of-academic-excellence-2-hour-learning-remote-%24400-000-year-usd-at-crossover-4379455232" target="_blank" rel="noopener">
+        Director of Academic Excellence, 2 Hour Learning (Remote) - $400,000/year USD &mdash; Crossover / 2 Hour Learning
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/head-of-academic-innovation-2-hour-learning-remote-%24400-000-year-usd-at-crossover-4382477022" target="_blank" rel="noopener">
+        Head of Academic Innovation, 2 Hour Learning (Remote) - $400,000/year USD &mdash; Crossover (2 Hour Learning)
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/manager-ai-and-stem-innovation-at-the-university-of-texas-at-austin-4390899754" target="_blank" rel="noopener">
+        Manager, AI and STEM Innovation &mdash; The University of Texas at Austin
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://boards.greenhouse.io/anthropic/jobs/4251453008" target="_blank" rel="noopener">
+        Unknown — Job Board Index Page (not a specific role) &mdash; Anthropic
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/anthropic/jobs/5154112008" target="_blank" rel="noopener">
+        Research Operations, Economic Research &mdash; Anthropic
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/anthropic/jobs/5123742008" target="_blank" rel="noopener">
+        Analyst, The Anthropic Institute at Anthropic &mdash; Anthropic
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/anthropic/jobs/5127559008" target="_blank" rel="noopener">
+        Product Manager, Consumer &mdash; Anthropic
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/senior-people-programs-development-manager-at-strava-4380016949" target="_blank" rel="noopener">
+        Senior People Programs & Development Manager &mdash; Strava
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://tt.linkedin.com/jobs/view/vice-president-learning-2-hour-learning-remote-%24200-000-year-usd-at-crossover-3988841291" target="_blank" rel="noopener">
+        Vice President Learning, 2 Hour Learning (Remote) - $200,000/year USD &mdash; Crossover (client: 2 Hour Learning)
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/director-of-learning-strategy-2-hour-learning-remote-%24400-000-year-usd-at-crossover-4354950670" target="_blank" rel="noopener">
+        Director of Learning Strategy &mdash; 2 Hour Learning / Crossover
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/director-of-educational-strategy-2-hour-learning-remote-%24400-000-year-usd-at-crossover-4370776306" target="_blank" rel="noopener">
+        Director of Educational Strategy &mdash; 2-Hour Learning / Crossover
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/director-of-academic-excellence-2-hour-learning-remote-%24400-000-year-usd-at-crossover-4382455956" target="_blank" rel="noopener">
+        Director of Academic Excellence, 2 Hour Learning (Remote) &mdash; Crossover
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/director-of-academics-2-hour-learning-remote-%24400-000-year-usd-at-crossover-4389855029" target="_blank" rel="noopener">
+        Director of Academics, 2 Hour Learning (Remote) - $400,000/year USD &mdash; Crossover (2 Hour Learning)
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/leadership-development-specialist-remote-at-golden-tree-prospects-4389594182" target="_blank" rel="noopener">
+        Leadership Development Specialist (Remote) &mdash; Golden Tree Prospects
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/leadership-development-trainer-remote-at-the-life-you-love-global-solutions-4390609055" target="_blank" rel="noopener">
+        Leadership Development Trainer (REMOTE) &mdash; The Life You Love Global Solutions
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/anthropic/jobs/4020350008" target="_blank" rel="noopener">
+        Performance Engineer &mdash; Anthropic
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/anthropic/jobs/5119478008" target="_blank" rel="noopener">
+        Engineering Manager, People Products &mdash; Anthropic
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/anthropic/jobs/4017544008" target="_blank" rel="noopener">
+        Research Engineer, Agents &mdash; Anthropic
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/anthropic/jobs/5023394008" target="_blank" rel="noopener">
+        Anthropic AI Safety Fellow &mdash; Anthropic
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/khanacademy/jobs/7445002" target="_blank" rel="noopener">
+        No matching role found (Jobs listing page, not a specific posting) &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://boards.greenhouse.io/khanacademy/jobs/6464211" target="_blank" rel="noopener">
+        No matching role found — Khan Academy jobs listing page (no individual role matched) &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/khanacademy/jobs/6996777" target="_blank" rel="noopener">
+        No matching role found &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://boards.greenhouse.io/khanacademy/jobs/6352713" target="_blank" rel="noopener">
+        No specific role matched — Khan Academy general jobs listing page &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://boards.greenhouse.io/khanacademy/jobs/6367739" target="_blank" rel="noopener">
+        No Matching Role Found (Khan Academy Jobs Listing Page) &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/khanacademy/jobs/7724300" target="_blank" rel="noopener">
+        Senior AI Engineer (24 months fixed-term) &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/khanacademy/jobs/7403267" target="_blank" rel="noopener">
+        No matching role found &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/khanacademy/jobs/7629702" target="_blank" rel="noopener">
+        Legal Operations Manager, Privacy and Compliance &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://boards.greenhouse.io/khanacademy/jobs/4951287" target="_blank" rel="noopener">
+        No matching role found &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://boards.greenhouse.io/khanacademy/jobs/6367073" target="_blank" rel="noopener">
+        No specific role matched — general job board listing returned &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/coursera/jobs/5620252004" target="_blank" rel="noopener">
+        Director, Global Compensation &mdash; Coursera
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/coursera/jobs/5383177004" target="_blank" rel="noopener">
+        Director, Global Compensation &mdash; Coursera
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/coursera/jobs/5653143004" target="_blank" rel="noopener">
+        Director, Global Compensation &mdash; Coursera
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/coursera/jobs/5693284004" target="_blank" rel="noopener">
+        Director, Global Compensation &mdash; Coursera
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/coursera/jobs/5621325004" target="_blank" rel="noopener">
+        Director, Global Compensation &mdash; Coursera
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/coursera/jobs/5783635004" target="_blank" rel="noopener">
+        No specific matching role — job board listing page only &mdash; Coursera
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/coursera/jobs/5492663004" target="_blank" rel="noopener">
+        No specific targeted role — job board listing page only &mdash; Coursera
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/coursera/jobs/5638617004" target="_blank" rel="noopener">
+        No specific matching role — job board listing page only &mdash; Coursera
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/chanzuckerberginitiative/jobs/6693488" target="_blank" rel="noopener">
+        No specific role matched — CZI job board listing (13 open roles, none mission-aligned for Scott) &mdash; Chan Zuckerberg Initiative
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://boards.greenhouse.io/chanzuckerberginitiative/jobs/6507845" target="_blank" rel="noopener">
+        Multiple Openings – No Matching Role &mdash; Chan Zuckerberg Initiative
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/chanzuckerberginitiative/jobs/6962255" target="_blank" rel="noopener">
+        Multiple Openings (No Relevant Role Listed) &mdash; Chan Zuckerberg Initiative
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://boards.greenhouse.io/chanzuckerberginitiative/jobs/6284312" target="_blank" rel="noopener">
+        Multiple Openings (no role match for candidate) &mdash; Chan Zuckerberg Initiative
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://boards.greenhouse.io/chanzuckerberginitiative/jobs/6341067" target="_blank" rel="noopener">
+        Multiple Openings (No Role Match Found) &mdash; Chan Zuckerberg Initiative
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.lever.co/whoop/b1f7b6bc-318b-4e1c-b4fd-1b1e45f75bce" target="_blank" rel="noopener">
+        Software Engineering Manager (AI) &mdash; WHOOP
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/AI-Fellow_B021482-2" target="_blank" rel="noopener">
+        AI Fellow &mdash; Bill & Melinda Gates Foundation
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://netflix.wd1.myworkdayjobs.com/en-US/Netflix/job/Senior-Simulation-and-Experiential-Designer---Leadership-Programs_JR39634" target="_blank" rel="noopener">
+        Senior Simulation and Experiential Designer - Leadership Programs &mdash; Netflix
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/remote-leadership-personal-development-opportunity-at-choose2elevate-4389865062" target="_blank" rel="noopener">
+        Remote- Leadership & Personal Development Opportunity &mdash; Choose2Elevate
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/leadership-development-advisor-personal-development-programs-remote-at-succeed-beyond-belief-4382632142" target="_blank" rel="noopener">
+        Leadership Development Advisor/ Personal Development Programs/ Remote &mdash; Succeed Beyond Belief
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/leadership-development-consultant-%E2%80%93-remote-at-your-future-within-4388683278" target="_blank" rel="noopener">
+        Leadership Development Consultant – Remote &mdash; Your Future Within (posting expired/redirected; actual employer unclear)
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/remote-leadership-development-consultant-at-breakthrough-blueprint-4394237009" target="_blank" rel="noopener">
+        Remote Leadership Development Consultant &mdash; Breakthrough Blueprint
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/chanzuckerberginitiative/jobs/7587201" target="_blank" rel="noopener">
+        No matching role found (job listing page only) &mdash; Chan Zuckerberg Initiative
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://boards.greenhouse.io/chanzuckerberginitiative/jobs/6130600" target="_blank" rel="noopener">
+        No matching role — full job board listing returned &mdash; Chan Zuckerberg Initiative
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/chanzuckerberginitiative/jobs/6693107" target="_blank" rel="noopener">
+        Multiple Openings — No Matching Role Found &mdash; Chan Zuckerberg Initiative
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/peloton/jobs/7170847" target="_blank" rel="noopener">
+        Senior Electrical Engineer &mdash; Peloton
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jll.wd1.myworkdayjobs.com/jllcareers" target="_blank" rel="noopener">
+        Multiple Facilities/Operations Roles (Job Board Page) &mdash; JLL (Jones Lang LaSalle)
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/digital-ai-and-innovation-internship-global-call-for-2026-at-undp-careers-4393250946" target="_blank" rel="noopener">
+        Digital, AI and Innovation Internship: Global Call for 2026 &mdash; UNDP Careers
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+  </ul>
+</div>
+
+
+</body>
+</html>
