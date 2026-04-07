@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opportunity Scan — Apr 06, 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --blue: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --green-bg: #1a3f1e;
+    --yellow-bg: #3d2e0d;
+    --red-bg: #3d1210;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .back { font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+  h1 { color: var(--blue); font-size: 1.6rem; margin-bottom: 0.3rem; }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2.section {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2rem 0 1rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--border);
+  }
+
+  .card.high { border-left-color: var(--green); }
+  .card.mid  { border-left-color: var(--yellow); }
+  .card.low  { border-left-color: var(--red); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-title { font-weight: 600; font-size: 1.05rem; color: #e6edf3; }
+  .card-company { color: var(--blue); }
+  .card-location { color: var(--muted); font-size: 0.88rem; }
+
+  .score-badge {
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+  .score-badge.high { background: var(--green-bg); color: var(--green); }
+  .score-badge.mid  { background: var(--yellow-bg); color: var(--yellow); }
+  .score-badge.low  { background: var(--red-bg); color: var(--red); }
+
+  .summary { margin: 0.5rem 0 0.75rem; }
+
+  ul.factors {
+    list-style: none;
+    margin: 0.3rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  ul.factors li { padding-left: 1.2em; position: relative; font-size: 0.9rem; }
+  ul.factors li::before { position: absolute; left: 0; }
+
+  ul.strengths li::before { content: "+"; color: var(--green); }
+  ul.concerns li::before  { content: "–"; color: var(--yellow); }
+  ul.disq li::before      { content: "⚠"; color: var(--red); font-size: 0.8em; }
+
+  .card-link { margin-top: 0.75rem; font-size: 0.9rem; }
+
+  .below-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .below-list {
+    list-style: none;
+    padding: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .below-list li { padding: 0.2rem 0; }
+  .below-list a { color: var(--muted); }
+  .below-list a:hover { color: var(--text); }
+  .below-score { font-size: 0.8rem; }
+
+  .empty { color: var(--muted); font-style: italic; margin: 1rem 0; }
+</style>
+</head>
+<body>
+
+<p class="back"><a href="../index.html">← All Reports</a></p>
+
+<h1>Opportunity Scan — Apr 06, 2026</h1>
+<p class="meta">
+  Run 2026-04-06 19:09 &middot;
+  17 URLs found &middot;
+  17 scored &middot;
+  2 surfaced (score &ge; 5)
+</p>
+
+
+
+
+
+
+<div class="card high">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Certification Development Lead</div>
+      <div>
+        <span class="card-company">Anthropic</span>
+        
+        <span class="card-location"> &middot; New York City, NY; San Francisco, CA</span>
+        
+      </div>
+    </div>
+    <span class="score-badge high">7/10</span>
+  </div>
+
+  
+  <p class="summary">Anthropic is a top watchlist company for Scott, and a certification/credentialing development role at an AI safety company aligns strongly with his responsible AI adoption identity thread. The NYC location is eligible, though the SF option and potential West Coast presence warrants scrutiny; the role's focus on building something new (zero-to-one certification program) is a strong pull factor.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Anthropic is explicitly on Scott's mission-aligned watchlist — automatic surfacing regardless of title</li><li>Certification development is a program-launch, zero-to-one type role that matches Scott's builder identity</li><li>NYC location is eligible and potentially East Coast anchor-compatible</li><li>Role likely sits at the intersection of AI education and credentialing — directly in Scott's responsible AI adoption lane</li><li>Anthropic's mission resonance could override moderate concerns about role-type fit</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>San Francisco is listed as a co-primary location — if the role requires SF presence or relocation, that is a hard disqualifier; needs clarification</li><li>Certification development can skew toward content/courseware production rather than experiential or live facilitation, which is a weaker modality fit for Scott</li><li>Limited detail in the posting to confirm audience (VP+/senior leaders vs. general workforce) or modality (experiential vs. async e-learning)</li><li>Scott has no visible portfolio in professional certification or credentialing specifically — domain translation gap to flag</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://job-boards.greenhouse.io/anthropic/jobs/4799425008" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Senior Manager, Learning</div>
+      <div>
+        <span class="card-company">Affirm</span>
+        
+        <span class="card-location"> &middot; Remote US</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">6/10</span>
+  </div>
+
+  
+  <p class="summary">Strong alignment on leadership development, facilitation, and program design capabilities, but the role skews toward managing an existing corporate L&D function at a fintech company rather than zero-to-one innovation or AI-focused work — and Affirm is not a mission-resonant company for Scott.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Remote-first role with strong compensation ($160-210K base outside CA/WA/NY/NJ/CT) that meets or exceeds current comp targets</li><li>Leadership development focus (manager and executive levels) matches Scott's preferred audience and modality signals</li><li>Facilitation, coaching, and program design are core to the role — strong capability match</li><li>ICF coaching certification listed as preferred qualification, not required — Scott's coaching background is a differentiator here</li><li>Explicitly values human-centered design, cohort-based experience, and live instruction over async e-learning</li><li>8+ years experience bar is achievable and not overly credentialed</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Affirm is a fintech company with no mission resonance for Scott — not on the watchlist and not in a sector he's flagged as high-signal</li><li>Role is evolving and scaling an existing practice, not launching something new — weak on the zero-to-one identity thread</li><li>No AI adoption or edtech dimension to the work — misses the 'responsible AI' reputation Scott is building toward</li><li>LMS/learning technology platform ownership is listed as part of the role — a weak-fit modality signal</li><li>Scope is internal people-leader development at a mid-size company, not the executive-level or high-autonomy org context Scott prioritizes</li><li>No indication the role would open doors to consulting or coaching — may create similar constraints to Apple</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="http://job-boards.greenhouse.io/affirm/jobs/7600904003" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="below-section">
+  <h2 class="section">Below threshold (score &lt; 5)</h2>
+  <ul class="below-list">
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/anthropic/jobs/5126762008" target="_blank" rel="noopener">
+        Developer Education Lead &mdash; Anthropic
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/coursera" target="_blank" rel="noopener">
+        No specific role match — multiple openings listed (closest: Industry Partnerships Manager, Learning Designer, Director Global Compensation) &mdash; Coursera
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://ca.linkedin.com/jobs/view/learning-and-leadership-development-lead-remote-at-the-path-to-aliveness-4384429886" target="_blank" rel="noopener">
+        Learning and Leadership Development Lead &mdash; The Path to Aliveness
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/learning-development-specialist-%E2%80%93-leadership-development-remote-at-wholehearted-lifestyle-4384008847" target="_blank" rel="noopener">
+        Learning & Development Specialist – Leadership Development | Remote &mdash; Wholehearted Lifestyle
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/anthropic/jobs/5076616008" target="_blank" rel="noopener">
+        Research Scientist, Societal Impacts &mdash; Anthropic
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://boards.greenhouse.io/chanzuckerberginitiative/jobs/5959941" target="_blank" rel="noopener">
+        No matching role found (CZI job board listing only) &mdash; Chan Zuckerberg Initiative
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/khanacademy/jobs/5382920" target="_blank" rel="noopener">
+        No Matching Role Found &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://boards.greenhouse.io/chanzuckerberginitiative/jobs/6995533" target="_blank" rel="noopener">
+        No matching role found (CZI job board listing only) &mdash; Chan Zuckerberg Initiative
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://boards.greenhouse.io/chanzuckerberginitiative/jobs/6340711" target="_blank" rel="noopener">
+        No matching role found (job board listing only) &mdash; Chan Zuckerberg Initiative
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://gevernova.wd5.myworkdayjobs.com/en-us/vernova_externalsite/job/sr-director---program-management--physical-ai-_r5037002-1" target="_blank" rel="noopener">
+        Sr. Director - Program Management (Physical AI) &mdash; GE Vernova
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/program-director-ai-security-initiative-5219c-cltc-at-university-of-california-berkeley-4380724450" target="_blank" rel="noopener">
+        Program Director, AI Security Initiative (5219C) - CLTC &mdash; University of California, Berkeley
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://wgu.wd5.myworkdayjobs.com/en-US/External/job/Lead-Academic-Program-Manager--BSW-_JR-024595" target="_blank" rel="noopener">
+        Lead Academic Program Manager (BSW) &mdash; Western Governors University (WGU)
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/assistant-professor-and-program-director-of-ai-business-strategy-at-palmer-theological-seminary-of-eastern-university-4397168844" target="_blank" rel="noopener">
+        Assistant Professor and Program Director of AI Business Strategy &mdash; Palmer Theological Seminary of Eastern University
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/khanacademy/jobs/7680287" target="_blank" rel="noopener">
+        Content Intern, ELA ($42/hour; 40 hours/week; 8 weeks, Summer 2026) &mdash; Khan Academy
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://clarios.wd5.myworkdayjobs.com/de-DE/clarioscareers/job/Learning---Development-Intern--Summer-2026-_WD45764" target="_blank" rel="noopener">
+        Learning & Development Intern, Summer 2026 &mdash; Clarios
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+  </ul>
+</div>
+
+
+</body>
+</html>
