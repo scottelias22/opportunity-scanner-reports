@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opportunity Scan — Apr 08, 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --blue: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --green-bg: #1a3f1e;
+    --yellow-bg: #3d2e0d;
+    --red-bg: #3d1210;
+    --gray-bg: #21262d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .back { font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+  h1 { color: var(--blue); font-size: 1.6rem; margin-bottom: 0.3rem; }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2.section {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2rem 0 1rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--border);
+  }
+
+  .card.high { border-left-color: var(--green); }
+  .card.mid  { border-left-color: var(--yellow); }
+  .card.low  { border-left-color: var(--red); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-title { font-weight: 600; font-size: 1.05rem; color: #e6edf3; }
+  .card-company { color: var(--blue); }
+  .card-location { color: var(--muted); font-size: 0.88rem; }
+
+  .score-badge {
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+  .score-badge.high { background: var(--green-bg); color: var(--green); }
+  .score-badge.mid  { background: var(--yellow-bg); color: var(--yellow); }
+  .score-badge.low  { background: var(--red-bg); color: var(--red); }
+
+  /* Actionability + source tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  .tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: lowercase;
+  }
+
+  .tag-geo-eligible    { background: var(--green-bg);  color: var(--green); }
+  .tag-geo-relocation  { background: var(--yellow-bg); color: var(--yellow); }
+  .tag-geo-nonstarter  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-comp-inrange    { background: var(--green-bg);  color: var(--green); }
+  .tag-comp-notposted  { background: var(--gray-bg);   color: var(--muted); }
+  .tag-comp-below      { background: var(--red-bg);    color: var(--red); }
+
+  .tag-side-allows     { background: var(--green-bg);  color: var(--green); }
+  .tag-side-unclear    { background: var(--gray-bg);   color: var(--muted); }
+  .tag-side-restricts  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-source          { background: var(--gray-bg);   color: var(--muted); }
+
+  .summary { margin: 0.5rem 0 0.75rem; }
+
+  ul.factors {
+    list-style: none;
+    margin: 0.3rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  ul.factors li { padding-left: 1.2em; position: relative; font-size: 0.9rem; }
+  ul.factors li::before { position: absolute; left: 0; }
+
+  ul.strengths li::before { content: "+"; color: var(--green); }
+  ul.concerns li::before  { content: "–"; color: var(--yellow); }
+  ul.disq li::before      { content: "⚠"; color: var(--red); font-size: 0.8em; }
+
+  .card-link { margin-top: 0.75rem; font-size: 0.9rem; }
+
+  .below-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .below-list {
+    list-style: none;
+    padding: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .below-list li { padding: 0.2rem 0; }
+  .below-list a { color: var(--muted); }
+  .below-list a:hover { color: var(--text); }
+  .below-score { font-size: 0.8rem; }
+
+  .empty { color: var(--muted); font-style: italic; margin: 1rem 0; }
+</style>
+</head>
+<body>
+
+<p class="back"><a href="../index.html">← All Reports</a></p>
+
+<h1>Opportunity Scan — Apr 08, 2026</h1>
+<p class="meta">
+  Run 2026-04-08 11:09 &middot;
+  2451 URLs found &middot;
+  41 scored &middot;
+  8 surfaced (score &ge; 5)
+</p>
+
+
+
+
+
+
+<div class="card high">
+  <div class="card-header">
+    <div>
+      <div class="card-title">AI Deployment Manager - Core Ecosystem, EDU</div>
+      <div>
+        <span class="card-company">OpenAI</span>
+        
+        <span class="card-location"> &middot; Not determinable from loaded content</span>
+        
+      </div>
+    </div>
+    <span class="score-badge high">9/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">📍 eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">💰 not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-restricts">🔒 likely restricts</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">This is a near-perfect alignment: OpenAI is a top watchlist company, the role sits squarely at the AI + education intersection, and 'AI Deployment Manager' in an EDU context maps directly onto Scott's identity thread of being the person organizations trust to figure out responsible AI adoption inside real systems. The 'Core Ecosystem' framing suggests building and launching, not maintaining, which hits the zero-to-one booster as well.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>OpenAI is a top-tier watchlist company with automatic surfacing regardless of title</li><li>AI + education intersection is Scott's primary identity thread and the explicit focus of this role</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Large tech company IP and exclusivity clauses will almost certainly restrict Cedar Coaching and consulting side work</li><li>Job posting content did not fully load (CAPTCHA/timeout warning), so role details like travel requirements, seniority level, and exact scope could not be fully verified</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://jobs.ashbyhq.com/openai/e2d67035-e522-4c97-a68c-8ed31b245ff0" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card high">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Certification Development Lead</div>
+      <div>
+        <span class="card-company">Anthropic</span>
+        
+        <span class="card-location"> &middot; New York City, NY; San Francisco, CA</span>
+        
+      </div>
+    </div>
+    <span class="score-badge high">8/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">📍 eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">💰 not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-restricts">🔒 likely restricts</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">This is a compelling match on two of three pull factors: company (Anthropic is top of the watchlist) and role context (explicit 0-to-1 build, credentialing program from scratch, partner ecosystem). The role type is adjacent but not a direct hit — it's certification and partner enablement rather than leadership development or AI adoption programming, and the audience is SI/consulting partners rather than senior leaders. Scott's program-launch identity thread and educational design instincts are directly relevant, and the AI mission alignment is as strong as it gets.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Anthropic is the highest-signal watchlist company for Scott's responsible AI adoption identity thread — this is exactly the kind of organization he wants his name associated with</li><li>Explicit 0-to-1 build: standing up a multi-tiered certification program where only a first credential exists is a zero-to-one story that matches the 'launched something new at [place]' reputation thread</li><li>Competency framework design, assessment methodology beyond multiple-choice, and scenario-based testing language maps directly to Scott's experiential and simulation-based learning background</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>The primary audience is SI and consulting partners (technical/developer ecosystem), not senior leaders or VP+ — this is a meaningful drift from Scott's highest-scoring audience signals</li><li>The role sits closer to credentialing infrastructure and partner enablement than to leadership development, facilitation, or AI adoption programming inside organizations — the day-to-day work may feel more operational than Scott's identity thread requires</li><li>Large tech company likely restricts consulting and coaching side work via IP/exclusivity clauses, which blocks a key career unlock Scott is pursuing</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://job-boards.greenhouse.io/anthropic/jobs/5097348008" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card high">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Sr. Manager, AI Enablement</div>
+      <div>
+        <span class="card-company">Headspace</span>
+        
+        <span class="card-location"> &middot; San Francisco - Hybrid</span>
+        
+      </div>
+    </div>
+    <span class="score-badge high">8/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-nonstarter">🚫 non-starter</span>
+    
+
+    
+    
+      <span class="tag tag-comp-inrange">💰 in range</span>
+    
+
+    
+    
+      <span class="tag tag-side-restricts">🔒 likely restricts</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">This role is a strong fit on two of three pull factors: the role itself (AI adoption, zero-to-one program building, enablement infrastructure) maps closely to Scott's identity thread as the person organizations trust to figure out responsible AI adoption, and Headspace is a watchlist company (fitness/wellness personal interest alignment). The context is compelling — reporting to the COO, broad executive support, building from scratch — and the 90-day success metrics read like a founding charter. The gap is that the role skews toward technical program management and product ops rather than learning design or leadership development, which is Scott's deeper domain strength.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Headspace is a watchlist company (wellness/fitness sector) with genuine mission resonance</li><li>Explicit zero-to-one mandate — building AI intake, champions network, playbooks, and governance from scratch aligns with Scott's second identity thread</li><li>Responsible AI framing ('member safety, privacy, measurable impact') mirrors Scott's first identity thread almost verbatim</li><li>Senior visibility: reporting to COO with exec-level stakeholder access</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Role is more technical program management / product ops than learning design or leadership development — capability translation required and may feel like a stretch in the application narrative</li><li>San Francisco hybrid (3 days/week) is a non-starter for geography without relocation, and West Coast relocation is explicitly off the table</li><li>Large tech/consumer company environment likely restricts side consulting and coaching via IP/conflict clauses</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://job-boards.greenhouse.io/hs/jobs/7567761" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card high">
+  <div class="card-header">
+    <div>
+      <div class="card-title">AI Deployment Manager - Singapore</div>
+      <div>
+        <span class="card-company">OpenAI</span>
+        
+        <span class="card-location"> &middot; Singapore</span>
+        
+      </div>
+    </div>
+    <span class="score-badge high">7/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-nonstarter">🚫 non-starter</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">💰 not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-restricts">🔒 likely restricts</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">OpenAI is a top-tier watchlist company and the role directly intersects with responsible AI adoption — Scott's core identity thread. The work (designing and delivering technical enablement, workshops, executive briefings, adoption programs) maps well to his live facilitation, experiential learning, and leadership development strengths. The primary dampener is the heavy technical depth requirement (RAG, APIs, Codex, agents in production) which represents a real capability gap, and the role is more enterprise customer success than zero-to-one program founding.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>OpenAI is a top watchlist company with direct mission alignment to responsible AI adoption — automatic score booster</li><li>Role centers on live facilitation, executive briefings, workshops, and adoption programs — strong match to Scott's experiential and facilitation strengths</li><li>Audience includes C-suite and senior leaders across enterprise, government, and educational institutions — matches his preferred VP+ audience signal</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Requires deep technical fluency in APIs, RAG, fine-tuning, agents, and Codex — this is a significant domain gap that would need honest self-assessment</li><li>Role is post-sales enablement within an existing GTM function, not a zero-to-one launch or founding of a new program — limits identity thread fit</li><li>Singapore-based hybrid requirement is a hard geography non-starter</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://jobs.ashbyhq.com/openai/22cb5102-521b-4144-aece-3cf4ed64ff9b" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Customer Education, Learning Experience & Curriculum Lead</div>
+      <div>
+        <span class="card-company">OpenAI</span>
+        
+        <span class="card-location"> &middot; San Francisco</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">6/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-nonstarter">🚫 non-starter</span>
+    
+
+    
+    
+      <span class="tag tag-comp-inrange">💰 in range</span>
+    
+
+    
+    
+      <span class="tag tag-side-restricts">🔒 likely restricts</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">OpenAI is a top watchlist company and the AI + education intersection is a strong pull, earning a baseline boost. However, the role is primarily curriculum writing, content development, and LMS/course operations — all of which fall squarely in Scott's weak-fit modality zone (async e-learning, courseware development as primary function). The audience is enterprise customers broadly, not senior leaders or VP+ cohorts, and the role is more production/maintenance than zero-to-one program launch.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>OpenAI is a top-tier watchlist company with strong mission resonance for Scott's responsible AI adoption identity thread</li><li>AI + education intersection is explicit and central — role is literally about AI literacy and workforce enablement at scale</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Primary function is curriculum writing, script development, QA checklists, and course production — Scott's profile explicitly deprioritizes courseware and content development as primary work</li><li>No indication of experiential, simulation-based, or senior leader audience focus; this is enterprise customer onboarding education, not executive or leadership development</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://jobs.ashbyhq.com/openai/c4726cfd-59c2-4977-80c3-e2204ce27b8e" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">GTM Readiness Lead</div>
+      <div>
+        <span class="card-company">OpenAI</span>
+        
+        <span class="card-location"> &middot; Sydney, Australia</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">6/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-nonstarter">🚫 non-starter</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">💰 not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-restricts">🔒 likely restricts</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">OpenAI is a top watchlist company and the zero-to-one program-building framing aligns with Scott's identity thread, earning a meaningful boost. However, the role is fundamentally sales enablement — enabling GTM reps to sell better — rather than responsible AI adoption, learning innovation, or leadership development. The function and audience don't connect to Scott's strongest signals.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>OpenAI is a top-tier watchlist company; mission alignment is very high</li><li>Explicitly a founding/building role — 'from scratch' program development for a scaling GTM team matches the zero-to-one identity thread</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Core function is sales enablement, not AI adoption, leadership development, or experiential learning — closer to the 'do not surface' zone of sales-adjacent roles</li><li>Sydney-based with no remote option; the role serves a commercial GTM audience rather than senior leaders, educators, or mission-driven learners</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://jobs.ashbyhq.com/openai/4f2edd33-a836-4d98-86cf-bed57f6319c8" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Manager, Professional Learning (Remote, US)</div>
+      <div>
+        <span class="card-company">Newsela</span>
+        
+        <span class="card-location"> &middot; Remote - US</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">5/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">📍 eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">💰 not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-unclear">🏗 unclear</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">Newsela is a watchlist company and the role touches professional learning leadership, facilitation, and content design — all areas of genuine capability fit. However, this is primarily a people manager + content operations role focused on K-12 educator PD delivery, which skews toward maintaining and scaling an existing function rather than launching something new. The audience is teachers and district staff, not senior leaders, and the modality emphasis on webinars, async modules, and LMS-adjacent delivery is a weak fit signal. No AI angle present.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Newsela is on the watchlist — automatic surfacing warranted</li><li>Professional learning leadership with facilitation coaching and content design responsibilities aligns with Scott's L&D background</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Role is primarily managing and scaling an existing PL function, not a zero-to-one build — dampens score</li><li>Audience is K-12 teachers and administrators, not senior leaders; modality leans toward async and webinar formats, both weak-fit signals</li><li>Up to 50% travel during peak seasons is a significant constraint without posted comp justification</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://job-boards.greenhouse.io/newsela/jobs/7644018" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Senior Program Manager, Foundational AI</div>
+      <div>
+        <span class="card-company">WHOOP</span>
+        
+        <span class="card-location"> &middot; Boston, MA</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">5/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">📍 eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-inrange">💰 in range</span>
+    
+
+    
+    
+      <span class="tag tag-side-restricts">🔒 likely restricts</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">WHOOP is a watchlist company (fitness/wellness personal interest alignment), which earns an automatic surfacing and a score boost. However, this role is a technical program management position within a Foundational AI team — focused on ML model delivery, sprint planning, data pipelines, and cross-functional engineering coordination — not on AI adoption, learning, education, or leadership development. The role is adjacent to Scott's responsible AI interest but doesn't connect to his identity thread in a meaningful way.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>WHOOP is explicitly on the watchlist under fitness/wellness personal interest alignment</li><li>Role involves AI program management at a mission-driven consumer health company, which is directionally relevant to responsible AI adoption work</li><li>Boston on-site location is geographically eligible</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Core function is technical ML project delivery (model training, inference, data pipelines) — not learning, leadership development, education, or AI adoption for organizations</li><li>No connection to Scott's experiential learning, coaching, or zero-to-one program launch identity thread; this is a sustaining/delivery role within an existing AI team, not a founding or building role</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://jobs.lever.co/whoop/b677aa52-ba51-4cc7-a39a-17e07d850f36" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="below-section">
+  <h2 class="section">Below threshold (score &lt; 5)</h2>
+  <ul class="below-list">
+    
+    <li>
+      <a href="https://berklee.wd1.myworkdayjobs.com/en-US/BerkleeCareers/job/Berklee-College-of-Music---Boston/Head-of-Content-and-Audience-Growth_R0010963" target="_blank" rel="noopener">
+        Head of Content and Audience Growth &mdash; Berklee College of Music (BEATL)
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.ashbyhq.com/openai/7fa9f3f2-4945-4081-a3ba-eccdef8a6121" target="_blank" rel="noopener">
+        Director, People Operations &mdash; OpenAI
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.ashbyhq.com/openai/794e6d74-1ab1-459d-8adb-bb3398e9deb1" target="_blank" rel="noopener">
+        Head of People Science and Operations &mdash; OpenAI
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.lever.co/thinkahead/ad8c92d6-7d91-4345-b080-5b1ad462d7e7" target="_blank" rel="noopener">
+        AI Consulting Director, AI Services &mdash; AHEAD
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/llrpartnersjobs/jobs/4145555009" target="_blank" rel="noopener">
+        Director of AI Strategy & Value Creation &mdash; LLR Partners
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.lever.co/livefront/0009ca65-3aa5-4592-8119-917460fa86f4" target="_blank" rel="noopener">
+        VP, AI & Automation &mdash; Livefront
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/anthropic/jobs/5139654008" target="_blank" rel="noopener">
+        Research Lead, Training Insights &mdash; Anthropic
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.ashbyhq.com/openai/f2376a07-ecfa-4ff9-9033-c9ee05532f4b" target="_blank" rel="noopener">
+        Manager, AI Success Engineers &mdash; OpenAI
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.ashbyhq.com/openai/9148a023-9b50-4b9c-87f0-5ef32fd6cec9" target="_blank" rel="noopener">
+        Support Delivery Lead, EMEA - Dublin &mdash; OpenAI
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/khanacademy/jobs/7625814" target="_blank" rel="noopener">
+        Project Lead &mdash; Khan Academy
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://cset.georgetown.edu/job/research-or-senior-fellow-frontier-ai/" target="_blank" rel="noopener">
+        Frontier AI Research Lead (Research or Senior Fellow) &mdash; Center for Security and Emerging Technology (CSET) — Georgetown University
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.lever.co/whoop/d7ce8476-ea6a-4c74-adff-042cf49ae048" target="_blank" rel="noopener">
+        VP, Product (AI) &mdash; Whoop
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.lever.co/whoop/7cb9e21c-bbff-4a71-9a4e-fe62db3deeb3" target="_blank" rel="noopener">
+        Head of Applied AI &mdash; WHOOP
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/hs/jobs/7580489" target="_blank" rel="noopener">
+        Principal Product Manager, LLM Innovation &mdash; Headspace
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.jobvite.com/suffolkuniversity/job/ooCfxfww" target="_blank" rel="noopener">
+        Director of Externship Programs – Practitioner in Residence &mdash; Suffolk University Law School
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://brandeis.wd5.myworkdayjobs.com/en-US/Jobs/job/Brandeis---Waltham-Campus/Associate-University-Librarian_R0013024-1" target="_blank" rel="noopener">
+        Associate University Librarian &mdash; Brandeis University
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://berklee.wd1.myworkdayjobs.com/en-US/BerkleeCareers/job/Berklee-College-of-Music---Boston/Full-time-Faculty--Screen-Scoring--Game-and-Interactive-Media-Scoring-_R0010990" target="_blank" rel="noopener">
+        Full-time Faculty, Screen Scoring (Game and Interactive Media Scoring) &mdash; Berklee College of Music
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://berklee.wd1.myworkdayjobs.com/en-US/BerkleeCareers/job/Boston-Conservatory-at-Berklee/Full-time-Faculty--Core-Studies--Musicology-_R0010967" target="_blank" rel="noopener">
+        Full-time Faculty, Core Studies (Musicology) &mdash; Boston Conservatory at Berklee
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://csusystem.wd12.myworkdayjobs.com/en-US/fortcollins_careers/job/Akron-CO/Extension-Area-Specialist--Family-and-Consumer-Sciences-and-4-H-Youth-Development--Golden-Plains-Area_R2026103140" target="_blank" rel="noopener">
+        Extension Area Specialist, Family and Consumer Sciences and 4-H Youth Development, Golden Plains Area &mdash; Colorado State University Extension
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/anthropic/jobs/4741102008" target="_blank" rel="noopener">
+        Engineering Manager, Inference &mdash; Anthropic
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/khanacademy/jobs/7561420" target="_blank" rel="noopener">
+        Senior Analytics Engineer &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/khanacademy/jobs/7786887" target="_blank" rel="noopener">
+        Data Engineering & Analytics Lead &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/khanacademy/jobs/7691865" target="_blank" rel="noopener">
+        Hindi Localization Expert (Science) &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/khanacademy/jobs/7606491" target="_blank" rel="noopener">
+        Science Manager &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/khanacademy/jobs/7244685" target="_blank" rel="noopener">
+        Subject Matter Expert - Chemistry &mdash; Khan Academy
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/newsela/jobs/7697975" target="_blank" rel="noopener">
+        Director, Data Platform & Analytics &mdash; Newsela
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/chanzuckerberginitiative/jobs/7769821" target="_blank" rel="noopener">
+        Counsel, AI & Technology &mdash; Chan Zuckerberg Initiative
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/hs/jobs/7746887" target="_blank" rel="noopener">
+        VP, Design Studio &mdash; Headspace
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/hs/jobs/7607609" target="_blank" rel="noopener">
+        Staff Product Manager, Personalization - Foundations &mdash; Headspace
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/hs/jobs/7652606" target="_blank" rel="noopener">
+        Engineering Manager, AI &mdash; Headspace
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/hs/jobs/6561618" target="_blank" rel="noopener">
+        Staff Software Engineer, Machine Learning &mdash; Headspace
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.lever.co/workingfamilies/5708c33b-2c45-4282-97f8-13664f7fced0" target="_blank" rel="noopener">
+        Director of Data, Analytics, Technology, and Engineering &mdash; Working Families Party
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://berklee.wd1.myworkdayjobs.com/en-US/BerkleeCareers/job/Berklee-College-of-Music---Boston/Chair-of-Bass_R0010868" target="_blank" rel="noopener">
+        Chair of Bass &mdash; Berklee College of Music
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+  </ul>
+</div>
+
+
+</body>
+</html>
