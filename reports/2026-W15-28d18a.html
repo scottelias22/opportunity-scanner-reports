@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opportunity Scan — Apr 12, 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --blue: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --green-bg: #1a3f1e;
+    --yellow-bg: #3d2e0d;
+    --red-bg: #3d1210;
+    --gray-bg: #21262d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .back { font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+  h1 { color: var(--blue); font-size: 1.6rem; margin-bottom: 0.3rem; }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2.section {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2rem 0 1rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--border);
+  }
+
+  .card.high { border-left-color: var(--green); }
+  .card.mid  { border-left-color: var(--yellow); }
+  .card.low  { border-left-color: var(--red); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-title { font-weight: 600; font-size: 1.05rem; color: #e6edf3; }
+  .card-company { color: var(--blue); }
+  .card-location { color: var(--muted); font-size: 0.88rem; }
+
+  .score-badge {
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+  .score-badge.high { background: var(--green-bg); color: var(--green); }
+  .score-badge.mid  { background: var(--yellow-bg); color: var(--yellow); }
+  .score-badge.low  { background: var(--red-bg); color: var(--red); }
+
+  /* Actionability + source tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  .tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: lowercase;
+  }
+
+  .tag-geo-eligible    { background: var(--green-bg);  color: var(--green); }
+  .tag-geo-relocation  { background: var(--yellow-bg); color: var(--yellow); }
+  .tag-geo-nonstarter  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-comp-inrange    { background: var(--green-bg);  color: var(--green); }
+  .tag-comp-notposted  { background: var(--gray-bg);   color: var(--muted); }
+  .tag-comp-below      { background: var(--red-bg);    color: var(--red); }
+
+  .tag-side-allows     { background: var(--green-bg);  color: var(--green); }
+  .tag-side-unclear    { background: var(--gray-bg);   color: var(--muted); }
+  .tag-side-restricts  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-source          { background: var(--gray-bg);   color: var(--muted); }
+
+  .summary { margin: 0.5rem 0 0.75rem; }
+
+  ul.factors {
+    list-style: none;
+    margin: 0.3rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  ul.factors li { padding-left: 1.2em; position: relative; font-size: 0.9rem; }
+  ul.factors li::before { position: absolute; left: 0; }
+
+  ul.strengths li::before { content: "+"; color: var(--green); }
+  ul.concerns li::before  { content: "–"; color: var(--yellow); }
+  ul.disq li::before      { content: "⚠"; color: var(--red); font-size: 0.8em; }
+
+  .card-link { margin-top: 0.75rem; font-size: 0.9rem; }
+
+  .below-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .below-list {
+    list-style: none;
+    padding: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .below-list li { padding: 0.2rem 0; }
+  .below-list a { color: var(--muted); }
+  .below-list a:hover { color: var(--text); }
+  .below-score { font-size: 0.8rem; }
+
+  .empty { color: var(--muted); font-style: italic; margin: 1rem 0; }
+</style>
+</head>
+<body>
+
+<p class="back"><a href="../index.html">← All Reports</a></p>
+
+<h1>Opportunity Scan — Apr 12, 2026</h1>
+<p class="meta">
+  Run 2026-04-12 08:28 &middot;
+  496 URLs found &middot;
+  23 scored &middot;
+  7 surfaced (score &ge; 5)
+</p>
+
+
+
+
+
+
+<div class="card high">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Senior Director, AI Transformation</div>
+      <div>
+        <span class="card-company">Amplify</span>
+        
+        <span class="card-location"> &middot; Remote - United States</span>
+        
+      </div>
+    </div>
+    <span class="score-badge high">7/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">📍 eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">💰 not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-restricts">🔒 likely restricts</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">Amplify is on the watchlist (education-adjacent tech) and this role is directly about driving AI adoption inside a mission-aligned K-12 organization — squarely hitting Scott's first identity thread. The scope is genuine transformation leadership with a zero-to-one flavor (building an AI intake framework, governance structures, literacy strategy from scratch), not maintenance. The primary dampener is that this is an IT/CIO-reporting technology transformation role rather than a learning or program design role — the day-to-day skews toward vendor evaluation, Agile delivery, and technical architecture oversight more than experiential design or people development, which is a meaningful modality mismatch.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Amplify is a watchlist company with a clear K-12 education mission and 15M+ student reach — automatic surfacing trigger</li><li>Role explicitly tasks the leader with building AI governance frameworks, literacy strategy, and intake infrastructure from scratch — genuine zero-to-one scope that matches Scott's identity thread around responsible AI adoption</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Reports to CIO and partners with Engineering — this is fundamentally a technology transformation role, not a learning/OD/program design role; Scott's strongest differentiators (facilitation, experiential design, coaching, leadership development) are peripheral here</li><li>Requires 10+ years in transformation or technology leadership with deep LLM/AI architecture fluency and Agile delivery experience — likely a credential gap on the technical and enterprise IT side that would need significant framing to overcome</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://amplify.wd1.myworkdayjobs.com/en-US/Amplify_Careers/job/Remote---United-States/Senior-Director--AI-Transformation_Req_12572" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Senior Associate Dean, Professional and Lifelong Learning</div>
+      <div>
+        <span class="card-company">Harvard University – Harvard Kennedy School</span>
+        
+        <span class="card-location"> &middot; Cambridge, MA</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">6/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">📍 eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">💰 not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-allows">🏗 likely allows</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">Harvard Kennedy School is on the watchlist and the professional/lifelong learning mission is directionally aligned, but this is a senior executive dean role managing a 40-person department with full P&L responsibility — it skews heavily toward institutional administration, budget management, and business-to-business enterprise sales strategy rather than Scott's identity thread of designing and launching learning experiences. The role is more 'run the machine' than 'build something new,' and the scale of organizational management may exceed where Scott is positioned today.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Harvard Kennedy School is a watchlist institution with strong mission resonance around public policy leadership development</li><li>Executive education and professional learning for senior public-sector leaders is a high-signal audience match (VP+ equivalent)</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Role is primarily institutional administration and P&L management for an existing 40-person department — far more 'maintaining and scaling' than zero-to-one building</li><li>B2B program sales strategy and international market development are core responsibilities that don't align with Scott's skills or identity thread</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://careers.harvard.edu/job/senior-associate-dean-professional-and-lifelong-learning-in-cambridge-ma-united-states-jid-1340" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Senior Strategy Officer, AI Initiatives, Foundation Strategy Office LTE 2 Years</div>
+      <div>
+        <span class="card-company">Bill & Melinda Gates Foundation</span>
+        
+        <span class="card-location"> &middot; Seattle, WA</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">6/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-nonstarter">🚫 non-starter</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">💰 not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-restricts">🔒 likely restricts</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">Gates Foundation is a top watchlist company and the AI strategy focus is a strong mission alignment, earning a baseline boost. However, the role is fundamentally a senior strategy consulting/policy function — structured problem solving, stakeholder briefings, framework development — not program launching, experiential learning design, or adoption implementation. Scott's identity thread is 'making responsible AI work inside real systems,' but this role is about advising at the executive/board level on strategy, not leading adoption programs or building learning infrastructure.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Gates Foundation is a top-tier watchlist company with direct mission resonance on AI + education + impact</li><li>AI strategy focus at a senior level aligns with Scott's identity thread around responsible AI adoption</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Role is strategy consulting and senior leadership advising, not program building, learning design, or adoption implementation — doesn't match Scott's primary role-type signals</li><li>2-year LTE (limited term employment) with Seattle on-site requirement; lacks the zero-to-one program launch dimension that defines Scott's identity thread</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/Seattle-WA/Senior-Strategy-Officer--AI-Initiatives--Foundation-Strategy-Office-LTE-2-Years_B021517" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Future of Education Strategist - AI Innovator</div>
+      <div>
+        <span class="card-company">Western Governors University (WGU)</span>
+        
+        <span class="card-location"> &middot; Salt Lake City, UT</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">6/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-nonstarter">🚫 non-starter</span>
+    
+
+    
+    
+      <span class="tag tag-comp-inrange">💰 in range</span>
+    
+
+    
+    
+      <span class="tag tag-side-unclear">🏗 unclear</span>
+    
+
+    
+      <span class="tag tag-source">search</span>
+    
+  </div>
+
+  
+  <p class="summary">This role sits at the AI + education intersection Scott is building toward, and the 'AI Futures Team' framing suggests some zero-to-one energy around shaping emerging programs. However, the execution is heavily weighted toward data analytics, LMS/online platform optimization, and CBE curriculum compliance — domains Scott doesn't lead with — and WGU's fully online, self-paced model is a weak fit for his experiential/live facilitation strengths.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Explicit AI + education focus on a dedicated 'AI Futures Team' — directly in Scott's target lane</li><li>Strategy and pilot program development components align with his program-launch identity thread</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>WGU's competency-based, async online model is misaligned with Scott's experiential, facilitation-first modality signals</li><li>Role leans heavily on data analytics, LMS platforms, and accreditation compliance — not Scott's primary strengths or interests</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://wgu.wd5.myworkdayjobs.com/en-US/External/job/Program-Experience-Strategist---AI-Futures-Team_JR-023123-1" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Executive Director of the Fellowship Program</div>
+      <div>
+        <span class="card-company">Harvard Radcliffe Institute</span>
+        
+        <span class="card-location"> &middot; Cambridge, MA</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">5/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">📍 eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">💰 not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-allows">🏗 likely allows</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">Harvard Radcliffe Institute is on the watchlist and the Cambridge location is a strong geographic fit. However, the role is fundamentally an academic fellowship administration and program stewardship position — managing scholars-in-residence, selection processes, and alumni engagement — rather than the AI adoption, learning design, experiential program building, or leadership development work that drives Scott's identity thread. The mission resonance is real but the role-function fit is weak.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Watchlist institution (Harvard) with a prestigious, mission-driven academic environment in a target geography</li><li>Program leadership role with genuine intellectual scope and cross-disciplinary community — aligns loosely with Scott's interest in building at prestigious institutions</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Core function is administering a residential fellowship for scholars and artists — not AI adoption, learning design, executive development, or experiential learning; this is a poor match for Scott's primary skill signals</li><li>Role appears to be stewarding and maintaining a long-established, prestigious program rather than launching or building something new — dampener for zero-to-one identity thread</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://careers.harvard.edu/job/executive-director-of-the-fellowship-program-in-cambridge-ma-united-states-jid-1339" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Managing Director, Engagement and Programs</div>
+      <div>
+        <span class="card-company">Columbia University — Data Science Institute</span>
+        
+        <span class="card-location"> &middot; New York, United States</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">5/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">📍 eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">💰 not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-allows">🏗 likely allows</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">Columbia is a watchlist company and the DSI's focus on responsible data science and AI is genuinely mission-aligned with Scott's identity thread. However, the role is primarily a senior ops/marketing/comms director position — overseeing brand strategy, media relations, events execution, and team management across functions — rather than a learning, program design, or AI adoption leadership role. The programmatic oversight is real but diffuse, and the day-to-day skews heavily toward communications and marketing disciplines Scott hasn't positioned himself in.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Columbia DSI is a watchlist institution with a directly relevant mission (responsible AI, data science) that matches Scott's identity thread</li><li>Programs and events leadership component offers some scope for building new initiatives, and DSI is a growth-oriented institute with expanding footprint</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Core function is communications, marketing, and brand strategy — not learning design, leadership development, or AI adoption programming — which is a significant mismatch with Scott's primary skill signals</li><li>No meaningful connection to experiential learning, simulation-based design, executive development, or coaching; this role would not open doors toward Cedar Coaching or consulting in Scott's target domain</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://opportunities.columbia.edu/jobs/managing-director-engagement-and-programs-new-york-united-states" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Senior Program Officer, Portable Memory & Context (24-Month LTE)</div>
+      <div>
+        <span class="card-company">Bill & Melinda Gates Foundation</span>
+        
+        <span class="card-location"> &middot; Seattle, WA / Washington, DC</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">5/10</span>
+  </div>
+
+  
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-nonstarter">🚫 non-starter</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">💰 not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-allows">🏗 likely allows</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">Gates Foundation is a top watchlist company and the AI + education intersection is strong, earning automatic surfacing and a meaningful boost. However, the role is deeply technical infrastructure work — portable memory stacks, agent orchestration, data provenance, interoperability standards — rather than learning design, program leadership, or AI adoption facilitation. Scott's identity thread is about helping organizations adopt AI responsibly and launching learning-oriented programs, not building the underlying technical architecture of AI systems. This is a policy/investment/technical strategy role, not a people-and-learning role.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Gates Foundation is a top-tier watchlist company with a mission Scott deeply resonates with — automatic surfacing applies</li><li>AI + education intersection is explicit and central to the role, not incidental</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Role requires deep technical AI infrastructure expertise (memory stacks, agent orchestration, provenance, interoperability protocols) that sits well outside Scott's functional wheelhouse</li><li>This is a grant-making and technical standards role, not a program leadership, learning design, or adoption facilitation role — misaligned with Scott's identity thread and day-to-day fit criteria</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/Seattle-WA/Senior-Program-Officer--Portable-Memory---Context--24-Month-LTE-_B021502-1" target="_blank" rel="noopener">View posting &rarr;</a></p>
+</div>
+
+
+
+<div class="below-section">
+  <h2 class="section">Below threshold (score &lt; 5)</h2>
+  <ul class="below-list">
+    
+    <li>
+      <a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/Seattle-WA/Senior-Strategy-Officer--Office-of-the-Chief-Communications-Officer_B021503-1" target="_blank" rel="noopener">
+        Senior Strategy Officer, Office of the Chief Communications Officer &mdash; Bill & Melinda Gates Foundation
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/Washington-DC/Officer--Strategy---Implementation-Management--DPAF_B021508" target="_blank" rel="noopener">
+        Officer, Strategy & Implementation Management, DPAF &mdash; Bill & Melinda Gates Foundation
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="http://job-boards.greenhouse.io/srsacquiom/jobs/5063933007?gh_src=17547f477us" target="_blank" rel="noopener">
+        Learning & Development Director &mdash; SRS Acquiom
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/New-Delhi-India/Senior-Officer--Philanthropic-Partnerships---India_B021521-1" target="_blank" rel="noopener">
+        Senior Officer, Philanthropic Partnerships – India &mdash; Gates Foundation
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/Washington-DC/Director--North-America-Team_B021515" target="_blank" rel="noopener">
+        Director, North America Team &mdash; Bill & Melinda Gates Foundation
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/Addis-Ababa-Ethiopia/Senior-Officer--Diversity--Equity---Inclusion--Africa--Europe---Middle-East_B021470-1" target="_blank" rel="noopener">
+        Senior Officer, Diversity, Equity & Inclusion, Africa, Europe & Middle East &mdash; Bill & Melinda Gates Foundation
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/New-Delhi-India/Program-Officer--Measurement--Learning-and-Evaluation--9-Month-LTE-_B021499-1" target="_blank" rel="noopener">
+        Program Officer, Measurement, Learning and Evaluation (9 Month LTE) &mdash; Bill & Melinda Gates Foundation
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://opportunities.columbia.edu/jobs/director-student-support-new-york-united-states" target="_blank" rel="noopener">
+        Director, Student Support &mdash; Columbia University — School of Professional Studies
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://opportunities.columbia.edu/jobs/senior-director-for-human-resources-and-academic-affairs-manhattanville-new-york-united-states" target="_blank" rel="noopener">
+        Senior Director for Human Resources and Academic Affairs &mdash; Columbia University – Zuckerman Institute
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://amplify.wd1.myworkdayjobs.com/en-US/Amplify_Careers/job/Remote---United-States/Director-of-Data---Analytics-Engineering_Req_12639" target="_blank" rel="noopener">
+        Director of Data & Analytics Engineering &mdash; Amplify
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/Seattle-WA/Senior-Officer--Strategy---Implementation-Management_B021519-1" target="_blank" rel="noopener">
+        Senior Officer, Strategy & Implementation Management &mdash; Bill & Melinda Gates Foundation
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/Seattle-WA/President--Global-Policy-and-Advocacy_B021514-1" target="_blank" rel="noopener">
+        President, Global Policy and Advocacy &mdash; Bill & Melinda Gates Foundation
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/vivvi/jobs/7696558003" target="_blank" rel="noopener">
+        Head of School (Night-Shift) - Huntsville &mdash; Vivvi Early Learning
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://curriculumassociates.wd5.myworkdayjobs.com/en-US/External/job/US-Remote/Regional-VP--Government-Relations_JR05230-2" target="_blank" rel="noopener">
+        Regional VP, Government Relations &mdash; Curriculum Associates
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://cengage.wd5.myworkdayjobs.com/en-US/CengageNorthAmericaCareers/job/VP--Product-Management-for-Higher-Ed--Remote-_R2025-952" target="_blank" rel="noopener">
+        VP, Product Management for Higher Ed (Remote) &mdash; Cengage Group
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://careers.harvard.edu/job/clinical-instructor-election-law-clinic-in-cambridge-ma-united-states-jid-1341" target="_blank" rel="noopener">
+        Clinical Instructor, Election Law Clinic &mdash; Harvard Law School
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+  </ul>
+</div>
+
+
+</body>
+</html>
