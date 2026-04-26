@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opportunity Scan -- Apr 26, 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --blue: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --green-bg: #1a3f1e;
+    --yellow-bg: #3d2e0d;
+    --red-bg: #3d1210;
+    --gray-bg: #21262d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .back { font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+  h1 { color: var(--blue); font-size: 1.6rem; margin-bottom: 0.3rem; }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2.section {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2rem 0 1rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--border);
+  }
+
+  .card.high { border-left-color: var(--green); }
+  .card.mid  { border-left-color: var(--yellow); }
+  .card.low  { border-left-color: var(--red); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-title { font-weight: 600; font-size: 1.05rem; color: #e6edf3; }
+  .card-company { color: var(--blue); }
+  .card-location { color: var(--muted); font-size: 0.88rem; }
+
+  .score-badge {
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+  .score-badge.high { background: var(--green-bg); color: var(--green); }
+  .score-badge.mid  { background: var(--yellow-bg); color: var(--yellow); }
+  .score-badge.low  { background: var(--red-bg); color: var(--red); }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  .tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: lowercase;
+  }
+
+  .tag-geo-eligible    { background: var(--green-bg);  color: var(--green); }
+  .tag-geo-relocation  { background: var(--yellow-bg); color: var(--yellow); }
+  .tag-geo-nonstarter  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-comp-inrange    { background: var(--green-bg);  color: var(--green); }
+  .tag-comp-notposted  { background: var(--gray-bg);   color: var(--muted); }
+  .tag-comp-below      { background: var(--red-bg);    color: var(--red); }
+
+  .tag-side-allows     { background: var(--green-bg);  color: var(--green); }
+  .tag-side-unclear    { background: var(--gray-bg);   color: var(--muted); }
+  .tag-side-restricts  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-source          { background: var(--gray-bg);   color: var(--muted); }
+
+  .summary { margin: 0.5rem 0 0.75rem; }
+
+  ul.factors {
+    list-style: none;
+    margin: 0.3rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  ul.factors li { padding-left: 1.2em; position: relative; font-size: 0.9rem; }
+  ul.factors li::before { position: absolute; left: 0; }
+
+  ul.strengths li::before { content: "+"; color: var(--green); }
+  ul.concerns li::before  { content: "-"; color: var(--yellow); }
+  ul.disq li::before      { content: "!"; color: var(--red); font-size: 0.8em; }
+
+  .card-link { margin-top: 0.75rem; font-size: 0.9rem; }
+
+  .below-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .below-list {
+    list-style: none;
+    padding: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .below-list li { padding: 0.2rem 0; }
+  .below-list a { color: var(--muted); }
+  .below-list a:hover { color: var(--text); }
+  .below-score { font-size: 0.8rem; }
+
+  .empty { color: var(--muted); font-style: italic; margin: 1rem 0; }
+</style>
+</head>
+<body>
+
+<p class="back"><a href="../index.html">All Reports</a></p>
+
+<h1>Opportunity Scan -- Apr 26, 2026</h1>
+<p class="meta">
+  Run 2026-04-26 13:00 |
+  129 URLs found |
+  7 scored |
+  4 surfaced (score >= 5)
+</p>
+
+
+
+
+
+
+<div class="card high">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Partner, Portfolio</div>
+      <div>
+        <span class="card-company">New Profit</span>
+        
+        <span class="card-location"> | Remote</span>
+        
+      </div>
+    </div>
+    <span class="score-badge high">7/10</span>
+  </div>
+
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-allows">likely allows</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">New Profit is a named watchlist company and this role directly engages Scott's strongest competencies: leadership coaching of senior executives (CEOs, boards), cohort-based peer learning design, and capacity building for mission-driven organizations. The Deal Partner function is essentially an executive coach + strategic advisor + board member hybrid, which maps well to his Cedar Coaching LLC thread and Apple People Manager background. The primary dampener is that this is a venture philanthropy/grantmaking role, not a learning or AI-focused role per se — the 'learning design' muscle is secondary to investor stewardship and nonprofit advisory work, which is a meaningful gap from his identity thread.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>New Profit is an explicit watchlist company, and the role's leadership coaching mandate (coaching CEOs and senior teams) directly mirrors Scott's coaching practice and Apple People leadership experience</li><li>Cohort-based peer learning model (Catalyze Investments) and board-level advisory work align with his experiential, senior-leader-audience strength — this is VP+ audience work by definition</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Primary credential required is venture philanthropy / nonprofit investment management experience, not learning design or AI — Scott lacks a grantmaking or board governance track record that would make him competitive</li><li>The role is fundamentally an investor/advisor hybrid, not a learning program leadership role; his AI adoption and experiential learning design identity thread is largely irrelevant to the core job</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://newprofit.applytojob.com/apply/WHzupmK1RS/Partner-Portfolio" target="_blank" rel="noopener">View posting</a></p>
+</div>
+
+
+
+<div class="card high">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Director of AI Integration</div>
+      <div>
+        <span class="card-company">University of Utah</span>
+        
+        <span class="card-location"> | Salt Lake City, UT</span>
+        
+      </div>
+    </div>
+    <span class="score-badge high">7/10</span>
+  </div>
+
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-nonstarter">non-starter</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-allows">likely allows</span>
+    
+
+    
+      <span class="tag tag-source">search</span>
+    
+  </div>
+
+  
+  <p class="summary">Director of AI Integration at a major research university is a strong role-type match — university-based AI adoption leadership is explicitly listed as a high-scoring archetype in Scott's profile. The role sits at the AI + education intersection with likely zero-to-one program-building scope, which aligns well with his identity thread as a responsible AI adoption leader. The University of Utah is not on the watchlist, and Salt Lake City is a non-starter geographically, but on pure fit the role is compelling.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>AI integration leadership at a university context — squarely in Scott's target role types (university-based AI in education/innovation roles)</li><li>Likely zero-to-one or early-stage program-building scope given 'Director of AI Integration' framing at an institution still establishing this function</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>University of Utah is not a watchlist institution, reducing the organizational mission pull factor</li><li>Without full job description, unclear whether the role skews toward technical IT/systems integration rather than learning and human adoption — could drift toward a hard-disqualifier-adjacent mismatch</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://www.linkedin.com/jobs/view/director-of-ai-integration-at-university-of-utah-4390232959" target="_blank" rel="noopener">View posting</a></p>
+</div>
+
+
+
+<div class="card high">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Senior Manager, AI and Leadership Enablement</div>
+      <div>
+        <span class="card-company">Transcarent</span>
+        
+        <span class="card-location"> | US - Remote</span>
+        
+      </div>
+    </div>
+    <span class="score-badge high">7/10</span>
+  </div>
+
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-restricts">likely restricts</span>
+    
+
+    
+      <span class="tag tag-source">search</span>
+    
+  </div>
+
+  
+  <p class="summary">Strong functional alignment across both pillars of the role—AI enablement/adoption and leadership development—which map directly to Scott's identity thread. The facilitation, cohort-based, and experiential modalities mentioned are explicit fit signals, and the role has a meaningful zero-to-one transformation component (L&D through an AI-first lens). Score stays at 7 rather than 8-9 because Transcarent is not a watchlist company, the healthcare/benefits-tech mission is less personally resonant than education or social impact contexts, and the audience skews internal workforce rather than senior leaders at VP+ level or high-autonomy orgs.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Dual mandate of AI enablement + leadership development maps precisely to Scott's core competencies and Apple Professional Learning background</li><li>Explicit cohort programs, workshops, and experiential facilitation modalities align with his strongest delivery preferences</li><li>Zero-to-one L&D transformation through an AI-first lens is a genuine founding-function signal, not just program maintenance</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Transcarent is not a watchlist company and healthcare benefits-tech is not a mission domain Scott has flagged as personally resonant</li><li>Internal workforce audience (first-time managers to senior leaders) is broader and less senior-leader-focused than Scott's ideal VP+/high-autonomy target audience</li><li>Corporate tech environment likely restricts Cedar Coaching LLC side work via standard IP/non-compete clauses</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://job-boards.greenhouse.io/transcarent/jobs/5802895004" target="_blank" rel="noopener">View posting</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Sr. Manager, Leadership & Organizational Development</div>
+      <div>
+        <span class="card-company">Alimentiv</span>
+        
+        <span class="card-location"> | Berlin (Remote)</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">5/10</span>
+  </div>
+
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-unclear">unclear</span>
+    
+
+    
+      <span class="tag tag-source">search</span>
+    
+  </div>
+
+  
+  <p class="summary">This role has genuine overlap with Scott's leadership development and cohort-based facilitation strengths, and the explicit mention of AI fluency as an organizational capability need is a partial fit signal. However, Alimentiv is a GI-focused CRO (contract research organization) — not a watchlist company, not mission-aligned with education or AI, and the role skews toward HR/OD infrastructure (talent review, succession planning, regulated training governance) rather than zero-to-one program launch or experiential learning innovation. It reads more like a senior L&D manager role at a non-watchlist enterprise than a career-defining move.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Cohort-based leadership development and facilitation are explicit requirements, matching Scott's experiential design background</li><li>AI fluency is called out as an organizational capability domain, creating a natural entry point for Scott's AI adoption expertise</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Alimentiv is a clinical research organization with no connection to Scott's identity thread in education, AI, or mission-driven tech — limiting resonance</li><li>Significant portion of the role involves HR infrastructure (succession pipelines, regulated training governance, talent review integration) that is tangential to Scott's strongest differentiators</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://jobs.lever.co/alimentiv-2/f96d7fa0-5dee-47b8-8ca3-dcf18ee6bf1b" target="_blank" rel="noopener">View posting</a></p>
+</div>
+
+
+
+<div class="below-section">
+  <h2 class="section">Below threshold (score < 5)</h2>
+  <ul class="below-list">
+    
+    <li>
+      <a href="https://careers.harvard.edu/job/program-manager-student-programs-in-cambridge-ma-united-states-jid-1388" target="_blank" rel="noopener">
+        Program Manager, Student Programs -- Harvard University — Salata Institute for Climate and Sustainability
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.ashbyhq.com/openai/24ddfd8a-cce8-4da8-a7f0-e4ea44f0d81c" target="_blank" rel="noopener">
+        Head of Industries -- OpenAI
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://osv-rubicon.wd5.myworkdayjobs.com/en-US/MagniteCareers/job/Lead--Learning---Development-Programs_R-01296" target="_blank" rel="noopener">
+        Lead, Learning & Development Programs -- Magnite
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+  </ul>
+</div>
+
+
+</body>
+</html>
