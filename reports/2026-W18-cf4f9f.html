@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opportunity Scan -- May 03, 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --blue: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --green-bg: #1a3f1e;
+    --yellow-bg: #3d2e0d;
+    --red-bg: #3d1210;
+    --gray-bg: #21262d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .back { font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+  h1 { color: var(--blue); font-size: 1.6rem; margin-bottom: 0.3rem; }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2.section {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2rem 0 1rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--border);
+  }
+
+  .card.high { border-left-color: var(--green); }
+  .card.mid  { border-left-color: var(--yellow); }
+  .card.low  { border-left-color: var(--red); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-title { font-weight: 600; font-size: 1.05rem; color: #e6edf3; }
+  .card-company { color: var(--blue); }
+  .card-location { color: var(--muted); font-size: 0.88rem; }
+
+  .score-badge {
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+  .score-badge.high { background: var(--green-bg); color: var(--green); }
+  .score-badge.mid  { background: var(--yellow-bg); color: var(--yellow); }
+  .score-badge.low  { background: var(--red-bg); color: var(--red); }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  .tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: lowercase;
+  }
+
+  .tag-geo-eligible    { background: var(--green-bg);  color: var(--green); }
+  .tag-geo-relocation  { background: var(--yellow-bg); color: var(--yellow); }
+  .tag-geo-nonstarter  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-comp-inrange    { background: var(--green-bg);  color: var(--green); }
+  .tag-comp-notposted  { background: var(--gray-bg);   color: var(--muted); }
+  .tag-comp-below      { background: var(--red-bg);    color: var(--red); }
+
+  .tag-side-allows     { background: var(--green-bg);  color: var(--green); }
+  .tag-side-unclear    { background: var(--gray-bg);   color: var(--muted); }
+  .tag-side-restricts  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-source          { background: var(--gray-bg);   color: var(--muted); }
+
+  .summary { margin: 0.5rem 0 0.75rem; }
+
+  ul.factors {
+    list-style: none;
+    margin: 0.3rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  ul.factors li { padding-left: 1.2em; position: relative; font-size: 0.9rem; }
+  ul.factors li::before { position: absolute; left: 0; }
+
+  ul.strengths li::before { content: "+"; color: var(--green); }
+  ul.concerns li::before  { content: "-"; color: var(--yellow); }
+  ul.disq li::before      { content: "!"; color: var(--red); font-size: 0.8em; }
+
+  .card-link { margin-top: 0.75rem; font-size: 0.9rem; }
+
+  .below-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .below-list {
+    list-style: none;
+    padding: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .below-list li { padding: 0.2rem 0; }
+  .below-list a { color: var(--muted); }
+  .below-list a:hover { color: var(--text); }
+  .below-score { font-size: 0.8rem; }
+
+  .empty { color: var(--muted); font-style: italic; margin: 1rem 0; }
+</style>
+</head>
+<body>
+
+<p class="back"><a href="../index.html">All Reports</a></p>
+
+<h1>Opportunity Scan -- May 03, 2026</h1>
+<p class="meta">
+  Run 2026-05-03 13:03 |
+  139 URLs found |
+  11 scored |
+  2 surfaced (score >= 5)
+</p>
+
+
+
+
+
+
+<div class="card high">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Director, AI Strategy</div>
+      <div>
+        <span class="card-company">Academy of Art University</span>
+        
+        <span class="card-location"> | Remote / Home Office</span>
+        
+      </div>
+    </div>
+    <span class="score-badge high">7/10</span>
+  </div>
+
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-inrange">in range</span>
+    
+
+    
+    
+      <span class="tag tag-side-allows">likely allows</span>
+    
+
+    
+      <span class="tag tag-source">search</span>
+    
+  </div>
+
+  
+  <p class="summary">This role is a strong functional match — AI strategy, executive advisory, facilitation, responsible AI governance, and zero-to-one program building all map directly to Scott's identity thread. The higher ed context and creative/mission-driven institutional flavor are genuine fit signals. The slight dampener is that Academy of Art University is not a watchlist institution and the creative arts focus is a softer mission alignment compared to, say, Khan Academy or a CSU/CU role.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Zero-to-one AI strategy function being built from scratch — directly matches founding/launch role archetype</li><li>Executive advisory and facilitation responsibilities (workshops, briefings, use case discovery) align tightly with Scott's live facilitation and senior leader engagement strengths</li><li>AI adoption + higher education intersection is a core fit zone; responsible AI and workforce transformation explicitly called out</li><li>Remote-eligible, comp range $135K–$165K is well within target</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Academy of Art University is not a watchlist institution and has a more commercial/for-profit higher ed profile, which may dampen mission resonance compared to research universities or social impact orgs</li><li>Role sits adjacent to learning design but doesn't explicitly call for instructional or experiential learning architecture — more strategy/consulting than program-building or facilitation-heavy</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://academyofartuniversity.wd5.myworkdayjobs.com/en-US/Academy_of_Art/job/Director--AI-Strategy_R0003998" target="_blank" rel="noopener">View posting</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Agentic AI Product Manager, HBS AI Institute</div>
+      <div>
+        <span class="card-company">Harvard Business School / HBS AI Institute</span>
+        
+        <span class="card-location"> | Boston, MA</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">5/10</span>
+  </div>
+
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-allows">likely allows</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">Harvard Business School is a watchlist-adjacent institution and the AI + executive education intersection is genuinely compelling for Scott, but this role is fundamentally a technical product manager position — owning agentic AI system architecture, backlogs, vendor management, and automation pipelines — not a learning leadership or program leadership role. The audience (executive education) and mission (AI adoption at HBS) align well, but the primary credential required is technical product management and agentic AI system expertise, not learning design or facilitation leadership.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Harvard Business School executive education context directly intersects with Scott's senior-leader audience focus and interest in AI adoption programs</li><li>AI + education intersection with a zero-to-one flavor (building and owning agentic AI capabilities for an institute that is actively scaling)</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Core role is technical product management — backlog ownership, agentic framework architecture, vendor oversight — not learning design, program leadership, or facilitation, which is where Scott's identity thread lives</li><li>Reports to 'Senior Associate Director, Data Science Vendors,' suggesting an operational/technical hierarchy rather than an education or program leadership track</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://careers.harvard.edu/job/agentic-ai-product-manager-hbs-ai-institute-in-boston-ma-united-states-jid-1015" target="_blank" rel="noopener">View posting</a></p>
+</div>
+
+
+
+<div class="below-section">
+  <h2 class="section">Below threshold (score < 5)</h2>
+  <ul class="below-list">
+    
+    <li>
+      <a href="https://berklee.wd1.myworkdayjobs.com/en-US/BerkleeCareers/job/Berklee-College-of-Music---Boston/Director--Student-Success-Advising_R0011125" target="_blank" rel="noopener">
+        Director, Student Success Advising -- Berklee College of Music
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/senior-director-of-ai-enabled-instruction-math-at-leading-educators-4409118367" target="_blank" rel="noopener">
+        Senior Director of AI-Enabled Instruction, Math -- Leading Educators
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://careers.harvard.edu/job/senior-data-scientist-hbs-ai-institute-in-boston-ma-united-states-jid-1196" target="_blank" rel="noopener">
+        Senior Data Scientist, HBS AI Institute -- Harvard Business School / HBS AI Institute
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://amplify.wd1.myworkdayjobs.com/en-US/Amplify_Careers/job/Remote---United-States/Lead-Professional-Learning-Specialist--STEM_Req_12673" target="_blank" rel="noopener">
+        Lead Professional Learning Specialist, STEM -- Amplify
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.lever.co/whoop/c6a488af-11f4-4663-810d-d0dc4f144c07" target="_blank" rel="noopener">
+        Technical Lead, ML Operations -- WHOOP
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://job-boards.greenhouse.io/hs/jobs/7868660" target="_blank" rel="noopener">
+        Director, Data Science -- Headspace
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://acelero.wd1.myworkdayjobs.com/AceleroLearningCareers/job/Remote/Vice-President-Policy-and-Performance_JR7971" target="_blank" rel="noopener">
+        Vice President Policy and Performance -- Acelero Learning
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/director-of-ai-enabled-instruction-ela-at-leading-educators-4401734491" target="_blank" rel="noopener">
+        Director of AI-Enabled Instruction, ELA -- Leading Educators
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://tamus.wd1.myworkdayjobs.com/en-US/WTAMU_External/job/Assistant-Associate-Professor-of-Educational-Leadership-EdDProgram_R-091364-1" target="_blank" rel="noopener">
+        Assistant/Associate Professor of Educational Leadership – Ed.D. Program -- West Texas A&M University
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+  </ul>
+</div>
+
+
+</body>
+</html>
