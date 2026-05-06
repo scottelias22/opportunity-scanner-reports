@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opportunity Scan -- May 06, 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --blue: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --green-bg: #1a3f1e;
+    --yellow-bg: #3d2e0d;
+    --red-bg: #3d1210;
+    --gray-bg: #21262d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .back { font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+  h1 { color: var(--blue); font-size: 1.6rem; margin-bottom: 0.3rem; }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2.section {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2rem 0 1rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--border);
+  }
+
+  .card.high { border-left-color: var(--green); }
+  .card.mid  { border-left-color: var(--yellow); }
+  .card.low  { border-left-color: var(--red); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-title { font-weight: 600; font-size: 1.05rem; color: #e6edf3; }
+  .card-company { color: var(--blue); }
+  .card-location { color: var(--muted); font-size: 0.88rem; }
+
+  .score-badge {
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+  .score-badge.high { background: var(--green-bg); color: var(--green); }
+  .score-badge.mid  { background: var(--yellow-bg); color: var(--yellow); }
+  .score-badge.low  { background: var(--red-bg); color: var(--red); }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  .tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: lowercase;
+  }
+
+  .tag-geo-eligible    { background: var(--green-bg);  color: var(--green); }
+  .tag-geo-relocation  { background: var(--yellow-bg); color: var(--yellow); }
+  .tag-geo-nonstarter  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-comp-inrange    { background: var(--green-bg);  color: var(--green); }
+  .tag-comp-notposted  { background: var(--gray-bg);   color: var(--muted); }
+  .tag-comp-below      { background: var(--red-bg);    color: var(--red); }
+
+  .tag-side-allows     { background: var(--green-bg);  color: var(--green); }
+  .tag-side-unclear    { background: var(--gray-bg);   color: var(--muted); }
+  .tag-side-restricts  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-source          { background: var(--gray-bg);   color: var(--muted); }
+
+  .summary { margin: 0.5rem 0 0.75rem; }
+
+  ul.factors {
+    list-style: none;
+    margin: 0.3rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  ul.factors li { padding-left: 1.2em; position: relative; font-size: 0.9rem; }
+  ul.factors li::before { position: absolute; left: 0; }
+
+  ul.strengths li::before { content: "+"; color: var(--green); }
+  ul.concerns li::before  { content: "-"; color: var(--yellow); }
+  ul.disq li::before      { content: "!"; color: var(--red); font-size: 0.8em; }
+
+  .card-link { margin-top: 0.75rem; font-size: 0.9rem; }
+
+  .below-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .below-list {
+    list-style: none;
+    padding: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .below-list li { padding: 0.2rem 0; }
+  .below-list a { color: var(--muted); }
+  .below-list a:hover { color: var(--text); }
+  .below-score { font-size: 0.8rem; }
+
+  .empty { color: var(--muted); font-style: italic; margin: 1rem 0; }
+</style>
+</head>
+<body>
+
+<p class="back"><a href="../index.html">All Reports</a></p>
+
+<h1>Opportunity Scan -- May 06, 2026</h1>
+<p class="meta">
+  Run 2026-05-06 13:01 |
+  122 URLs found |
+  9 scored |
+  3 surfaced (score >= 5)
+</p>
+
+
+
+
+
+
+<div class="card high">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Associate Director, AI Learning Innovation</div>
+      <div>
+        <span class="card-company">INSEAD</span>
+        
+        <span class="card-location"> | Singapore, Singapore</span>
+        
+      </div>
+    </div>
+    <span class="score-badge high">8/10</span>
+  </div>
+
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-nonstarter">non-starter</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-allows">likely allows</span>
+    
+
+    
+      <span class="tag tag-source">search</span>
+    
+  </div>
+
+  
+  <p class="summary">INSEAD is a world-class business school and this role sits squarely at the AI + executive education intersection — a near-ideal context for Scott's identity thread as a responsible AI adoption leader with deep experiential learning and senior-leader audience experience. The title and framing ('Innovation') suggest building rather than maintaining, and the audience (MBA/exec ed participants, likely VP+) is a strong match. The Singapore location is the primary friction point on actionability, not fit.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>AI learning innovation at a globally prestigious executive education institution — directly matches Scott's AI-in-education and senior-leader development thread</li><li>Associate Director framing at a business school strongly implies program-building, curriculum innovation, and cross-functional leadership rather than LMS administration or content maintenance</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Singapore-based position is a significant geographic mismatch with Scott's stated eligible locations</li><li>INSEAD is not on the watchlist, and the role may involve some courseware/content development depending on actual scope — full JD was not accessible to confirm modality and audience details</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://sg.linkedin.com/jobs/view/associate-director-ai-learning-innovation-at-insead-4366266987" target="_blank" rel="noopener">View posting</a></p>
+</div>
+
+
+
+<div class="card high">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Senior Simulation and Experiential Designer - Leadership Programs</div>
+      <div>
+        <span class="card-company">Netflix</span>
+        
+        <span class="card-location"> | Los Angeles, CA</span>
+        
+      </div>
+    </div>
+    <span class="score-badge high">8/10</span>
+  </div>
+
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-nonstarter">non-starter</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-restricts">likely restricts</span>
+    
+
+    
+      <span class="tag tag-source">search</span>
+    
+  </div>
+
+  
+  <p class="summary">This role is a near-perfect functional match for Scott's core identity thread — live simulation design, experiential learning, and senior/executive leadership audiences are all explicit strong fit signals in his profile. The posting explicitly calls out that this is NOT for e-learning builders but for in-room, live simulation designers, which is exactly Scott's sweet spot. The one drag on score is that Netflix is not a watchlist company and lacks the mission resonance (AI, education, social impact) that would push this to a 9-10.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Exact functional match: live business simulations and experiential learning for executives is the core of what Scott does and what scores highest in his profile</li><li>Senior leader audience (Netflix executives) and behavior-change-through-experience modality are explicit strong fit signals</li><li>Zero-to-one flavor ('take our leadership seminars to the next level') and agile/iterative design language align with Scott's founding/building orientation</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Netflix is not a watchlist company and the mission ('entertain the world') lacks the resonance Scott seeks in AI, education, or social impact contexts</li><li>Large corporate entertainment company likely has restrictive IP and side-work policies, which would conflict with Cedar Coaching LLC</li><li>Los Angeles on-site is a hard geography non-starter per the profile</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://netflix.wd108.myworkdayjobs.com/Netflix/job/Los-Angeles/Senior-Simulation-and-Experiential-Designer---Leadership-Programs_JR39634" target="_blank" rel="noopener">View posting</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Director, AI Service Delivery & Solutions</div>
+      <div>
+        <span class="card-company">Columbia University Information Technology (CUIT)</span>
+        
+        <span class="card-location"> | Manhattanville, New York</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">5/10</span>
+  </div>
+
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-inrange">in range</span>
+    
+
+    
+    
+      <span class="tag tag-side-allows">likely allows</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">Columbia is a watchlist institution and the role sits at the AI + higher education intersection, which are genuine pull factors. However, this is fundamentally an IT service delivery and operations role—focused on intake pipelines, vendor management, cross-functional orchestration, and enterprise governance—not learning design, facilitation, or adoption through experiential modality. Scott's identity thread is learning leadership and behavior change through experience, not enterprise IT portfolio management.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Columbia University is an explicit watchlist institution and the AI-in-higher-education context aligns with Scott's stated interest area</li><li>Zero-to-one signal is present—this is a new AIaaS function being stood up, and the 'front door' framing maps loosely to founding a program</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Core function is IT service delivery operations (intake triage, portfolio governance, vendor management, KPIs)—not learning design, facilitation, or adoption through experiential methods</li><li>No learning or human development dimension; 'adoption & change management' is a minor bullet in an otherwise IT-operations-heavy role, misaligning with Scott's primary credential and identity</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://opportunities.columbia.edu/jobs/director-ai-service-delivery-solutions-manhattanville-new-york-united-states" target="_blank" rel="noopener">View posting</a></p>
+</div>
+
+
+
+<div class="below-section">
+  <h2 class="section">Below threshold (score < 5)</h2>
+  <ul class="below-list">
+    
+    <li>
+      <a href="https://opportunities.columbia.edu/jobs/director-research-strategy-and-policy-new-york-united-states" target="_blank" rel="noopener">
+        Director, Research Strategy and Policy -- Columbia University — Center for Public Research and Leadership (CPRL)
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.ashbyhq.com/openai/05bea751-62ab-43d9-a5bb-77f385920af0" target="_blank" rel="noopener">
+        Research Scientist, Learning & Cognitive Outcomes -- OpenAI
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/Seattle-WA/Director-of-Education--K-12_B021556" target="_blank" rel="noopener">
+        Director of Education, K-12 -- Bill & Melinda Gates Foundation
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://www.linkedin.com/jobs/view/manager-professional-learning-remote-us-at-newsela-4389516583" target="_blank" rel="noopener">
+        Manager, Professional Learning (Remote, US) -- Newsela
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://careers.harvard.edu/job/faculty-associate-dean-for-admissions-in-boston-ma-united-states-jid-1432" target="_blank" rel="noopener">
+        Faculty Associate Dean for Admissions -- Harvard Medical School
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/Beijing-China/Senior-Program-Officer--Global-Policy-and-Advocacy_B021555" target="_blank" rel="noopener">
+        Senior Program Officer, Global Policy and Advocacy (9 Month LTE) -- Bill & Melinda Gates Foundation
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+  </ul>
+</div>
+
+
+</body>
+</html>
