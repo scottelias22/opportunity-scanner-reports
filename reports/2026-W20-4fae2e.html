@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opportunity Scan -- May 17, 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --blue: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --green-bg: #1a3f1e;
+    --yellow-bg: #3d2e0d;
+    --red-bg: #3d1210;
+    --gray-bg: #21262d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .back { font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+  h1 { color: var(--blue); font-size: 1.6rem; margin-bottom: 0.3rem; }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2.section {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2rem 0 1rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--border);
+  }
+
+  .card.high { border-left-color: var(--green); }
+  .card.mid  { border-left-color: var(--yellow); }
+  .card.low  { border-left-color: var(--red); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-title { font-weight: 600; font-size: 1.05rem; color: #e6edf3; }
+  .card-company { color: var(--blue); }
+  .card-location { color: var(--muted); font-size: 0.88rem; }
+
+  .score-badge {
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+  .score-badge.high { background: var(--green-bg); color: var(--green); }
+  .score-badge.mid  { background: var(--yellow-bg); color: var(--yellow); }
+  .score-badge.low  { background: var(--red-bg); color: var(--red); }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  .tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: lowercase;
+  }
+
+  .tag-geo-eligible    { background: var(--green-bg);  color: var(--green); }
+  .tag-geo-relocation  { background: var(--yellow-bg); color: var(--yellow); }
+  .tag-geo-nonstarter  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-comp-inrange    { background: var(--green-bg);  color: var(--green); }
+  .tag-comp-notposted  { background: var(--gray-bg);   color: var(--muted); }
+  .tag-comp-below      { background: var(--red-bg);    color: var(--red); }
+
+  .tag-side-allows     { background: var(--green-bg);  color: var(--green); }
+  .tag-side-unclear    { background: var(--gray-bg);   color: var(--muted); }
+  .tag-side-restricts  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-source          { background: var(--gray-bg);   color: var(--muted); }
+
+  .summary { margin: 0.5rem 0 0.75rem; }
+
+  ul.factors {
+    list-style: none;
+    margin: 0.3rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  ul.factors li { padding-left: 1.2em; position: relative; font-size: 0.9rem; }
+  ul.factors li::before { position: absolute; left: 0; }
+
+  ul.strengths li::before { content: "+"; color: var(--green); }
+  ul.concerns li::before  { content: "-"; color: var(--yellow); }
+  ul.disq li::before      { content: "!"; color: var(--red); font-size: 0.8em; }
+
+  .card-link { margin-top: 0.75rem; font-size: 0.9rem; }
+
+  .below-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .below-list {
+    list-style: none;
+    padding: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .below-list li { padding: 0.2rem 0; }
+  .below-list a { color: var(--muted); }
+  .below-list a:hover { color: var(--text); }
+  .below-score { font-size: 0.8rem; }
+
+  .empty { color: var(--muted); font-style: italic; margin: 1rem 0; }
+</style>
+</head>
+<body>
+
+<p class="back"><a href="../index.html">All Reports</a></p>
+
+<h1>Opportunity Scan -- May 17, 2026</h1>
+<p class="meta">
+  Run 2026-05-17 13:01 |
+  137 URLs found |
+  7 scored |
+  1 surfaced (score >= 5)
+</p>
+
+
+
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Program Director, CCSI</div>
+      <div>
+        <span class="card-company">Harvard University – Harvard Kennedy School</span>
+        
+        <span class="card-location"> | Cambridge, MA</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">5/10</span>
+  </div>
+
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-relocation">relocation open</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-allows">likely allows</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">This Harvard Kennedy School role has a meaningful pull factor — it's a zero-to-one program launch at a prestigious institution, and Scott has strong program leadership and curriculum development credentials. However, the primary mission focus is culture/civil society/democracy rather than AI, education technology, or leadership development in Scott's wheelhouse, and the role blends heavy administrative and development/donor functions that don't align with his identity thread. No AI signal, no experiential learning modality, and the audience is not senior executives.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Zero-to-one program launch at a prestigious institution (CCSI established 2024) — founding director energy</li><li>Curriculum development and executive education programming components are genuine fit signals</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Primary domain is cultural policy and civil society — not AI, learning technology, or leadership development Scott is known for</li><li>Significant administrative burden (donor stewardship, gift/grant financials, advisory board management) dilutes the learning/program design work Scott excels at</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://careers.harvard.edu/job/program-director-ccsi-in-cambridge-ma-united-states-jid-1482" target="_blank" rel="noopener">View posting</a></p>
+</div>
+
+
+
+<div class="below-section">
+  <h2 class="section">Below threshold (score < 5)</h2>
+  <ul class="below-list">
+    
+    <li>
+      <a href="https://opportunities.columbia.edu/jobs/director-research-strategy-and-policy-new-york-united-states-11c039b9-ddc8-4d5b-8942-823dc0b20fc7" target="_blank" rel="noopener">
+        Director, Research Strategy and Policy -- Columbia University (Center for Public Research and Leadership / School of Law)
+      </a>
+      <span class="below-score">(4/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://careers.harvard.edu/job/curriculum-and-pedagogy-manager-in-cambridge-ma-united-states-jid-1479" target="_blank" rel="noopener">
+        Curriculum and Pedagogy Manager -- Harvard University — Faculty of Arts and Sciences
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://utaustin.wd1.myworkdayjobs.com/en-US/UTstaff/job/Manager--AI-and-STEM-Innovation_R_00045250" target="_blank" rel="noopener">
+        Manager, AI and STEM Innovation -- University of Texas at Austin — Charles A. Dana Center
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.ashbyhq.com/openai/0db33200-b533-4c4c-84f6-f51fea91819b" target="_blank" rel="noopener">
+        Manager, AI Deployment Engineering (Korea) -- OpenAI
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://jobs.ashbyhq.com/openai/eeaf655b-9460-4e4e-b611-f0caf784c0b1" target="_blank" rel="noopener">
+        Support Delivery Lead, EMEA -- OpenAI
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://tamus.wd1.myworkdayjobs.com/en-US/TAMU_External/job/Director-for-Emerging-Technologies-and-Research_R-091459" target="_blank" rel="noopener">
+        Director for Emerging Technologies and Research -- Texas A&M University – High Performance Research Computing
+      </a>
+      <span class="below-score">(2/10)</span>
+    </li>
+    
+  </ul>
+</div>
+
+
+</body>
+</html>
