@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opportunity Scan -- May 20, 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --blue: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --green-bg: #1a3f1e;
+    --yellow-bg: #3d2e0d;
+    --red-bg: #3d1210;
+    --gray-bg: #21262d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .back { font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+  h1 { color: var(--blue); font-size: 1.6rem; margin-bottom: 0.3rem; }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2.section {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2rem 0 1rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--border);
+  }
+
+  .card.high { border-left-color: var(--green); }
+  .card.mid  { border-left-color: var(--yellow); }
+  .card.low  { border-left-color: var(--red); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-title { font-weight: 600; font-size: 1.05rem; color: #e6edf3; }
+  .card-company { color: var(--blue); }
+  .card-location { color: var(--muted); font-size: 0.88rem; }
+
+  .score-badge {
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+  .score-badge.high { background: var(--green-bg); color: var(--green); }
+  .score-badge.mid  { background: var(--yellow-bg); color: var(--yellow); }
+  .score-badge.low  { background: var(--red-bg); color: var(--red); }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  .tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: lowercase;
+  }
+
+  .tag-geo-eligible    { background: var(--green-bg);  color: var(--green); }
+  .tag-geo-relocation  { background: var(--yellow-bg); color: var(--yellow); }
+  .tag-geo-nonstarter  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-comp-inrange    { background: var(--green-bg);  color: var(--green); }
+  .tag-comp-notposted  { background: var(--gray-bg);   color: var(--muted); }
+  .tag-comp-below      { background: var(--red-bg);    color: var(--red); }
+
+  .tag-side-allows     { background: var(--green-bg);  color: var(--green); }
+  .tag-side-unclear    { background: var(--gray-bg);   color: var(--muted); }
+  .tag-side-restricts  { background: var(--red-bg);    color: var(--red); }
+
+  .tag-source          { background: var(--gray-bg);   color: var(--muted); }
+
+  .summary { margin: 0.5rem 0 0.75rem; }
+
+  ul.factors {
+    list-style: none;
+    margin: 0.3rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  ul.factors li { padding-left: 1.2em; position: relative; font-size: 0.9rem; }
+  ul.factors li::before { position: absolute; left: 0; }
+
+  ul.strengths li::before { content: "+"; color: var(--green); }
+  ul.concerns li::before  { content: "-"; color: var(--yellow); }
+  ul.disq li::before      { content: "!"; color: var(--red); font-size: 0.8em; }
+
+  .card-link { margin-top: 0.75rem; font-size: 0.9rem; }
+
+  .below-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .below-list {
+    list-style: none;
+    padding: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .below-list li { padding: 0.2rem 0; }
+  .below-list a { color: var(--muted); }
+  .below-list a:hover { color: var(--text); }
+  .below-score { font-size: 0.8rem; }
+
+  .empty { color: var(--muted); font-style: italic; margin: 1rem 0; }
+</style>
+</head>
+<body>
+
+<p class="back"><a href="../index.html">All Reports</a></p>
+
+<h1>Opportunity Scan -- May 20, 2026</h1>
+<p class="meta">
+  Run 2026-05-20 13:00 |
+  104 URLs found |
+  4 scored |
+  2 surfaced (score >= 5)
+</p>
+
+
+
+
+
+
+<div class="card high">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Project Director, AI Century Study</div>
+      <div>
+        <span class="card-company">American Institutes for Research (AIR)</span>
+        
+        <span class="card-location"> | US-Remote</span>
+        
+      </div>
+    </div>
+    <span class="score-badge high">7/10</span>
+  </div>
+
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-eligible">eligible</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-allows">likely allows</span>
+    
+
+    
+      <span class="tag tag-source">search</span>
+    
+  </div>
+
+  
+  <p class="summary">Strong alignment on AI + education intersection, mission-driven nonprofit research context, and the study's zero-to-one ambition (100-year longitudinal launch is effectively a founding-level program leadership role). Scott's PhD in Education/HRS, Apple learning leadership, and AI adoption focus map well to this role's intellectual and strategic demands. The dampener is that this is fundamentally a research director role—heavy on longitudinal study design, data governance, and academic partnership—rather than a learning design, facilitation, or organizational capability-building role, which is Scott's identity thread.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>AI + education intersection is explicit and central—the study directly addresses how AI reshapes human development, a topic Scott is deeply positioned on</li><li>Zero-to-one / program launch energy: leading the execution and evolution of a flagship 100-year study is effectively a founding role with high autonomy and strategic scope</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Role is research-director in character (longitudinal data collection, IRB/ethics, quantitative/qualitative methods governance) rather than learning design, facilitation, or leadership development—diverges from Scott's core identity thread</li><li>Thought leadership and dissemination framing skews toward policy and academic audiences rather than senior organizational leaders or practitioners, reducing resonance with Scott's coaching and experiential learning strengths</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="http://job-boards.greenhouse.io/americaninstitutesforresearch/jobs/5198420008" target="_blank" rel="noopener">View posting</a></p>
+</div>
+
+
+
+<div class="card mid">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Deputy Director, AI Infrastructure for Education</div>
+      <div>
+        <span class="card-company">Bill & Melinda Gates Foundation</span>
+        
+        <span class="card-location"> | Seattle, WA / Washington, DC</span>
+        
+      </div>
+    </div>
+    <span class="score-badge mid">6/10</span>
+  </div>
+
+  <div class="tags">
+    
+    
+      <span class="tag tag-geo-nonstarter">non-starter</span>
+    
+
+    
+    
+      <span class="tag tag-comp-notposted">not posted</span>
+    
+
+    
+    
+      <span class="tag tag-side-allows">likely allows</span>
+    
+
+    
+      <span class="tag tag-source">targeted</span>
+    
+  </div>
+
+  
+  <p class="summary">Gates Foundation is a watchlist company and the AI-in-education mission is a strong thematic match, but this role is fundamentally a philanthropic portfolio strategy and market infrastructure position — not a learning design, facilitation, or program leadership role. Scott's identity thread centers on experiential learning, behavior change, and program launch; this role centers on grantmaking strategy, market incentives, and ecosystem coalition-building at a systems level that doesn't map to his core strengths.</p>
+  
+
+  
+  <ul class="factors strengths">
+    <li>Gates Foundation is explicitly on the watchlist and the responsible AI in education mission is a near-perfect thematic alignment</li><li>AI + education intersection with a focus on responsible adoption, evidence generation, and equity — all strong signal words from the candidate profile</li>
+  </ul>
+  
+
+  
+  <ul class="factors concerns">
+    <li>Role is primarily a philanthropic strategy and grantmaking/portfolio management position, not a learning design, facilitation, or program leadership role — Scott's core credentials don't center on market infrastructure or EdTech investment strategy</li><li>Requires deep understanding of EdTech market business models, AI product pipelines, and hyperscaler partnerships — technical market-strategy expertise that isn't the candidate's primary credential or identity thread</li>
+  </ul>
+  
+
+  
+
+  <p class="card-link"><a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/Seattle-WA/Deputy-Director--AI-Infrastructure--US-Education-Data-_B021318-1" target="_blank" rel="noopener">View posting</a></p>
+</div>
+
+
+
+<div class="below-section">
+  <h2 class="section">Below threshold (score < 5)</h2>
+  <ul class="below-list">
+    
+    <li>
+      <a href="https://gatesfoundation.wd1.myworkdayjobs.com/en-US/Gates/job/Singapore/Senior-Program-Officer--Global-Policy---Advocacy--Digital-Public-Infrastructure---Inclusive-Financial-Systems_B021567-1" target="_blank" rel="noopener">
+        Senior Program Officer, Global Policy & Advocacy, Digital Public Infrastructure & Inclusive Financial Systems -- Bill & Melinda Gates Foundation
+      </a>
+      <span class="below-score">(3/10)</span>
+    </li>
+    
+    <li>
+      <a href="https://opportunities.columbia.edu/jobs/sr-assoc-director-clinical-svc-new-york-united-states" target="_blank" rel="noopener">
+        Sr Assoc Director-Clinical Svc -- Columbia University - Columbia Health
+      </a>
+      <span class="below-score">(1/10)</span>
+    </li>
+    
+  </ul>
+</div>
+
+
+</body>
+</html>
